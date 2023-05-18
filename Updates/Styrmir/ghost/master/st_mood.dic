@@ -1,0 +1,106 @@
+//MOOD
+
+//Mood runs on:
+//Discomfort level (pain)
+//Amusement level (tickling, jokes, humans bein silly)
+//Anger level (punching + frustration at humans)
+
+OnUpdateMood{
+	
+	case mood{
+		when 3{ //happy
+			if amusement < 3{
+				mood = 0
+				reason = "calmed down"
+			}
+		}
+		when 6{ //sad
+			if discomfort < 5{
+				if anger > 15{
+					mood = 9 
+					reason = "anger"
+				}else{
+					mood = 1
+					reason = "calming down"
+				}
+			}
+		
+		}
+		when 9{	//angry
+			if anger < 5{
+				if discomfort < 8{
+					mood = 1
+					reason = "calming down"
+				}else{
+					mood = 6
+					reason = "calming down"
+				}
+			}
+		
+		}
+		when 1{
+			if discomfort < 4 && anger < 4{
+				mood = 0
+				reason = "calmed down"
+			}
+		
+		}
+		others{ //neutral + windy + WIP
+			if discomfort >= 10 || anger >= 8{
+				mood = 1
+				reason = "worked up"
+			}elseif discomfort > 20{
+				mood = 6
+				reason = "discomfort"
+			}elseif discomfort < 5 && amusement > 15{
+				mood = 3
+				reason = "amusement"
+			}elseif discomfort > 5 && anger > 15{
+				mood = 9
+				reason = "anger"
+			}
+		}
+	
+	}
+	
+	if population == 0{
+	//	mood = 9
+	//	reason = "died out"
+	}
+	
+	
+	//Decrement counters
+	if anger > 0{
+		anger--
+		if amusement >= 2{
+			amusement-=2
+		}
+		
+	}
+	
+	if amusement > 0{
+		amusement--
+	}
+	
+	if discomfort > 0{
+		discomfort--
+	}
+	
+	//Trump card: Sadness when about to die
+	if population == 1{
+		mood = 6
+		reason = "deaths"
+	}
+}
+
+
+MoodForce{
+	mood = _argv[0]
+	reason = _argv[1]
+	weather = -1
+	weathertimer = -1
+}
+
+
+
+

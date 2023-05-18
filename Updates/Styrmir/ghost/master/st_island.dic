@@ -1,0 +1,607 @@
+//ISLAND
+
+OnIslandInfo{
+	"%(BB)\_q\f[align,center]\f[height,+2]THE ISLAND\f[height,-2]\n"
+	--
+	if currentfestival != "None"; "\f[height,-2]~%currentfestival~\f[height,+2]\n"
+	--
+	"\n\f[align,left]"
+	--
+	"Population: %population/%housingavailable      \![*]\q[Villagers,OnVillagerMenu]\n"
+	--
+	"Happiness: %happiness/%(getHappyCap)      \![*]\q[Festivals,OnUnlockFestivalMenu]\n"
+	--
+	if electricityallowed == 1{
+		"Power: %electricity/%batterycap      \![*]\q[Buildings,OnBuyBuildings]\n"
+		--
+		"Generating Power: %(displayGenerators)\n\![*]\q[Check Electricity,OnEditPower]\n"
+	} 
+	--
+	/*
+	if population > 50{
+		"\nOrder: %order"
+	}
+	*/
+	--
+	"\n[half]Water Left: %(TOINT(watercontent))/%watercap\nFood supply: %TOINT(food)/%foodcap %(br)"
+	--
+	if ranchingallowed == 1{
+		"From Farms: %(displayFarms)\nFrom Animals: %(displayPens)%(br)\![*]\q[Check Farms,OnEditFarms]  \![*]\q[Check Pens,OnEditRanch]\n"
+	}else{
+		"From: %(displayFarms)%(br)\![*]\q[Check Farms,OnEditFarms]\n"
+	}
+	--
+	"\n[half]\f[align,center]"
+	--
+	"\![*]\q[Buy Upgrades,OnEditReligion]   \![*]\q[Buy Storage,OnUpgradeMenu]\n\![*]\q[Close Menu,blank]"
+	--
+	if cowlocation == 6{
+		"%(br)~~\_b[img\COW.png,inline]~~"
+	}
+	
+
+
+}
+
+displayFarms : all{
+	for _i = 0; _i < farms; _i++{
+		_crop = farmcontent[_i]
+		case _crop{
+			when "berries"{
+				"Berry Bushes"
+			}
+			when "rice"{
+				"Rice Paddy"
+			}
+			when "potatoes"{
+				"Potato Plot"
+			}
+			when "corn"{
+				"Corn Fields"
+			}
+			when "apples"{
+				"Apple Orchard"
+			}
+			when "wheat"{
+				"Wheat Field"
+			}
+			others{
+				"Empty Plot"
+			}
+		}
+		if _i > 1 && _i == farms{
+			", and"
+		}elseif _i != farms-1{
+			", "
+		}
+	}
+}
+
+
+displayPens : all{
+	for _i = 0; _i < 3; _i++{
+		_pen = pens[_i]
+		_info = penInfo[_i]
+		
+	//	if _pen[_i] > 0{
+			case _i{
+				when 0{
+					if animals[0] != 1{
+						"%(animals[0]) Cows"
+					}else{
+						"1 Cow"
+					}
+					
+				}
+				when 1{
+				
+					"%(animals[1]) Sheep"
+					
+				}
+				when 2{
+					if animals[2] != 1{
+						"%(animals[2]) Chickens"
+					}else{
+						"1 Chicken"
+					}
+				}
+				
+			}
+			if _i > 1 && _i == 1{
+				", and"
+			}elseif _i < 2{
+				", "
+			}
+	//	}
+	}
+}
+
+
+displayGenerators : all{
+	
+	for _i = 0; _i < ARRAYSIZE(powertypes); _i++{
+		
+		_num = powersources[_i]
+		if _num == -1{
+			_num = 0
+		}
+					
+		case _i{
+			when 0{
+				if _num != 1{
+					"%(_num) Lightning Rods"
+				}else{
+					"1 Lightning Rod"
+				}
+				
+			}
+			when 1{
+			
+				if _num != 1{
+					"%(_num) Windmills"
+				}else{
+					"1 Windmill"
+				}
+				
+			}
+			when 2{
+				if _num != 1{
+					"%(_num) Solar Panels"
+				}else{
+					"1 Solar Panel"
+				}
+			}when 3{
+				if _num != 1{
+					"%(_num) Steam Generators"
+				}else{
+					"1 Steam Generator"
+				}
+			}
+			when 4{
+			
+				if _num != 1{
+					"%(_num) Water Wheels"
+				}else{
+					"1 Water Wheel"
+				}
+				
+			}
+			
+			
+		}
+		if _i > 1 && _i == ARRAYSIZE(powertypes)-2{
+			", and "
+		}elseif _i < ARRAYSIZE(powertypes)-1{
+			", "
+		}
+	}
+}
+
+
+
+
+
+
+
+//-------------------------------------------------------------------------------------------
+//Minchange
+
+
+
+
+
+OnMinuteChange{
+	OnNaturalGrowth
+	timeopen++
+	if population > 1{
+		timealive++
+	}
+	
+	if minute % 3 == 0{
+		OnNaturalDecay
+		//resets any villager wants
+		villagerwant = -1
+	}
+	
+	if weathertimer > -1{
+		weathertimer--
+	}else{
+		weather = -1
+		"%(Styrmir)" //clear anim
+	}
+	
+	if minute % 6 == 0{
+		OnGrowPop
+		
+		//TELEPORT THE COW.
+		if largestcowcontest != ""{
+			cowlocation = RAND(11)
+			//0-5: in the shell
+			//6: island menu
+			//7: main menu
+			//8: settings
+			//9: stats
+			//10: chat
+		}
+	}
+	
+	if minute % 5 == 0{
+		dewdrops += (housingstage*2) + 1
+	}
+	
+	OnUpdateMood
+	
+	
+	
+	
+	if minute % 30 == 0 && recentdeaths > 0{
+		recentdeaths--
+	}
+	
+	case weather{
+		when 0{
+			//sun
+			//remWater(1)
+		}
+		when 1{
+			//clouds
+			addWater((housingstage)) //itty bitty bonus
+		}
+		when 3{
+			//rain
+			addWater((housingstage+1) * 8)
+		}
+		when 5{
+			//thunder
+			addWater((housingstage+1) * 9)
+			//addPower()
+		}
+		when 7{
+			//snow
+			addWater((housingstage+1) * 4)
+		}
+
+	}
+	
+	festivaltimer--
+	if timeuntilfestivalend > 0{
+		timeuntilfestivalend--
+	}else{
+		if currentfestival == "Harvest Festival"{
+			largestcowcontest == randVillagerName
+			dewdrops += 10
+		}
+		dewdrops += 5 //get Dew from festivals completing!
+		currentfestival = "None"
+		
+	}
+	
+	
+	if population == 0{
+		MoodForce(9,"died out")
+		"They're all dead, human! What advice have you given me that hasn't failed!? I can't believe you!\x"
+	}else{
+		if festivaltimer <= 0{
+			festivaltimer = -1
+			OnCheckForFestival
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------
+//Parts of Min Change
+
+
+
+//Every 3 mins
+OnNaturalDecay{
+	if food >= population/2{
+		food-= population/2 //half unit of food per person every 3 minutes
+	}elseif food == 0{
+		killVillager(MAX(TOINT(population/5),1))
+	}else{ //not quite starving
+		food = 0
+		
+	}
+	
+	if watercontent >= population/2{
+		watercontent-= population/2 //half unit of food per person every 3 minutes
+	}elseif watercontent == 0{
+		killVillager(MAX(TOINT(population/5),1))
+	}else{ //not quite dying of dehydration
+		watercontent = 0
+		
+	}
+	
+	
+	if currentfestival == "None"{
+		if batterycap > 200{ //happiness degrades faster when they discover technology LOL
+			if happiness > TOINT(population/10){
+				happiness -= TOINT(population/10)
+			}
+		}elseif batterycap > 50{ //happiness degrades faster when they discover technology LOL
+			if happiness > TOINT(population/15){
+				happiness -= TOINT(population/15)
+			}
+		}else{
+			if happiness > TOINT(population/20){
+				happiness -= TOINT(population/20)
+			}
+		}
+	}else{
+		happiness += TOINT((population/10) + happinessboosts/4)
+		amusement++
+	}
+	
+
+
+}
+
+//every 4
+OnGrowPop{
+	if population > 1{
+		if food > population * population{
+			birthVillager(TOINT(population/4)) //booming!
+		}elseif food > population * 25{
+			birthVillager(4)
+		}elseif food > population * 10{
+			birthVillager(2)
+		}elseif food > population * 5{
+			birthVillager(1)
+		}elseif food < population/4{
+			killVillager(MAX(TOINT(population/10),1))
+			
+		}
+	}
+	
+	if population > 0 && RAND(15) == 0{
+		killVillager(1)
+	}
+}
+
+
+//Each minute
+OnNaturalGrowth{
+	addWater((population/100)* productionmultiplier) //water is sustainable... nope, mostly need rain.
+	if mood == 6 {
+		addWater(farms * productionmultiplier) //bonus water if Styrmir's sad!
+	}
+
+	for _i = 0; _i < farms; _i++{
+		_crop = farmcontent[_i]
+		if watercontent > population/50{ //if this field has enough water to keep producing
+			case _crop{
+				when "berries"{
+					addFood(1* productionmultiplier)
+				}
+				when "rice"{
+					addFood(2* productionmultiplier)
+				}
+				when "potatoes"{
+					addFood(3* productionmultiplier)
+				}
+				when "corn"{
+					addFood(4* productionmultiplier)
+				}
+				when "apples"{
+					addFood(6* productionmultiplier)
+				}
+				when "wheat"{
+					addFood(2* productionmultiplier)
+				}
+			}
+			
+			watercontent -= (population/50)
+		}
+	}
+	
+	//Cows
+	if watercontent > (pens[0])/10{ //if this field has enough water to give cows
+		if rules[1] == 1{ //if Vegetarian
+			addFood((animals[0] * productionmultiplier)/10)
+		}else{
+			addFood((animals[0] * productionmultiplier)/4)
+		}
+		
+		watercontent -= (pens[0])/10
+	}else{
+		//Otherwise, chance to kill a cow. :(
+		if RAND(50) == 0{
+			if animals[0] > 0{
+				animals[0]--
+			}
+		}
+	}
+	//Sheep
+	if watercontent > (pens[1])/20{ //if this field has enough water to give sheep
+		textiles += animals[1] / 5
+		watercontent -= (pens[1])/20
+	}else{
+		//Otherwise, chance to kill a sheepie. :(
+		if RAND(50) == 0{
+			if animals[1] > 0{
+				animals[1]--
+			}
+		}
+	}
+	//Chickens
+	if watercontent > (pens[2])/50{ //if this field has enough water to give chickens
+		addFood((animals[0] * productionmultiplier)/20)
+		watercontent -= (pens[2])/50
+	}else{
+		//Otherwise, chance to kill a chicken. :(
+		if RAND(50) == 0{
+			if animals[2] > 0{
+				animals[2]--
+			}
+		}
+	}
+	
+	//power!
+	for _i = 0; _i < ARRAYSIZE(powertypes); _i++ {
+		
+		if powersources[_i] > 0{
+			case _i{
+				when 0{
+					//lightning
+					if mood >= 9{
+						addPower(powersources[_i] * 4)
+					}
+				}
+				when 1{
+					//windmills
+					if mood > 0 && mood < 3{
+						addPower(powersources[_i] * 2)
+					}
+				}
+				when 2{
+					//solar panels
+					if mood > 2 && mood < 6 {
+						addPower(powersources[_i] * 2)
+					}
+				}
+				when 3{
+					//steam
+					addPower(powersources[_i] * 2)
+					
+				}
+				when 4{
+					//water wheels
+					if mood > 6{
+						addPower(powersources[_i] * TOINT(watercapsbought/2))
+					}
+				}
+				
+			}
+			
+		}
+		
+	}
+	
+}
+
+
+
+
+
+
+
+OnVillagerMenu{
+	"\_qVillager Menu%(br)"
+	--
+	if rules[4] == 1{
+		"Current Priest: %currentpriestname"
+	}
+	--
+	"%(br)\![*]\q[Back,OnIslandInfo]  \![*]\q[Nevermind,blank]"
+
+}
+
+
+
+
+
+
+randVillagerName{
+	fullName //for now gives a random name, but later there will be a list of living villagers
+}
+
+
+
+birthVillager{
+	for _i = 0; _i < _argv[0]; _i++{
+		if population < housingavailable{
+			population++
+			addFood(-5)
+		}
+	
+	}
+}
+
+
+killVillager{
+	population -= TOINT(_argv[0])
+	recentdeaths += TOINT(_argv[0])
+	deaths += TOINT(_argv[0])
+	
+	addHappy(-1 * TOINT(_argv[0]))
+	
+	discomfort += TOINT(_argv[0]) * 2
+	
+	if recentdeaths > housingavailable/3{
+		MoodForce(6,"deaths")
+	}
+}
+
+
+addFood{
+	if food + _argv[0] <= 0{
+		food = 0
+	}elseif food + _argv[0] >= foodcap{
+		food = foodcap
+	}else{
+		food += _argv[0]
+	}
+	
+	totalfoodproduced += _argv[0]
+
+}
+
+
+addWater{
+	if watercontent + _argv[0] >= watercap{
+		watercontent = watercap
+	}else{
+		watercontent += _argv[0]
+	}
+
+}
+
+
+addPower{
+	if electricity + _argv[0] >= batterycap{
+		electricity = batterycap
+	}else{
+		electricity += _argv[0]
+	}
+
+}
+
+addHappy{
+	if happiness + _argv[0] < 0{
+		happiness = 0
+	}elseif happiness + _argv[0] >= getHappyCap{
+		happiness = getHappyCap
+	}else{
+		happiness += _argv[0]
+	}
+}
+
+
+getHappyCap{
+	_docked = 0
+	if watercontent < 100{
+		_docked += 20
+	}
+	if food < population * 3{
+		_docked += 40
+	}
+	_cap = 100 - _docked
+	if _cap < happiness{
+		happiness = _cap //keep it synced!
+	}
+	_cap //return
+	
+
+}

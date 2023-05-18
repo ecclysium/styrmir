@@ -1,0 +1,642 @@
+
+
+
+OnTechTree{
+	"%(BB)What will you be getting?%(br)\_q"
+	--
+	"\![*]\q[Investigate Farms,OnEditFarms]\n"
+	--
+	"\![*]\q[Investigate Animal Pens,OnEditRanch]\n"
+	--
+	//"\![*]\q[Investigate Power,OnEditPower]\n"
+	--
+	"\![*]\q[Investigate Entertainment,OnEditFun]\n"
+	--
+	//"\![*]\q[Investigate Religion,OnEditReligion]\n"
+	--
+	if electricityallowed == 1; "\![*]\q[Investigate Power,OnEditElectric]\n"
+	--
+	"\n[half]"
+	--
+	"\![*]\q[Upgrades,OnEditReligion]\n"
+	--
+	"\![*]\q[Buy Storage,OnUpgradeMenu]\n"
+	--
+	if electricityallowed == 1; "\![*]\q[Buy Buildings,OnBuyBuildings]\n"
+	--
+	"\n[half]"
+	--
+	"\![*]\q[Ask What's Wrong,OnRandomVillager]\n\n"
+	--
+	"%(br)\![*]\q[Back,OnSakuraMenu]  \![*]\q[Nevermind,blank]"
+
+}
+
+
+OnRandomVillager{
+	if food < population * 2{
+		"%(Villager)I'm kinda worried about our food sources..."
+	}
+	if population <= 5{
+		"%(Villager)Will I be the next to die?"
+	}
+	if happiness < 20{
+		"%(Villager)We could use some fun.\![raise,OnSetVillagerWant,11]"
+	}else{
+		"%(Villager)Well, I don't see anything too bad."
+	}
+	
+	if watercontent < farms * 10{
+		"%(Villager)Our crops are getting dry! We need help watering them!\![raise,OnSetVillagerWant,3]"
+	}
+}
+
+Villager{
+	"\1%(BB)%(fullName) says: "
+}
+
+OnSetVillagerWant{
+	villagerwant = reference0
+}
+
+farmMenuOpeners{
+	"Ooh, new farms? New crops?"
+}
+
+OnEditFarms{
+	if SHIORI3FW.Eventid != "OnNewFarm"; farmMenuOpeners
+	--
+	"%(br)\_q"
+	--
+	if dewdrops >= (50 * farms){
+		"\![*]\q[Buy New Farm (%(50*farms) Dew),OnNewFarm]%(br)"
+	}else{
+		"Next Farm Needs %(50*farms) Dew%(br)"
+	}
+	
+	--
+	_res = ""
+	for _i = 0; _i < farms; _i++ {
+		_crop = farmcontent[_i]
+		_res += "Farm #%(_i+1): "
+		
+		case _crop{
+			when "berries"{
+				_res += "Berry Grounds"
+			}
+			when "rice"{
+				_res += "Rice Paddy"
+			}
+			when "potatoes"{
+				_res += "Potato Plot"
+			}
+			when "corn"{
+				_res += "Corn Field"
+			}
+			when "apples"{
+				_res += "Apple Orchard"
+			}
+			when "wheat"{
+				_res += "Wheat Field"
+			}
+			others{
+				_res += "Empty Plot"
+			}
+		}
+		_res += " \__q[OnChangeCrop,%_i]\![*]Edit\__q\n"
+	}
+	_res
+	--
+	"%(br)\![*]\q[Nevermind,blank]"
+
+}
+
+OnNewFarm{
+	dewdrops -= 50 * farms
+	farms++
+	farmcontent ,= "empty"
+	"An empty plot has been cleared! Thank you, human."
+	--
+	"%(OnEditFarms)"
+}
+
+
+
+OnChangeCrop{
+	_index = reference0
+	"What crop should it be? You have %dewdrops dew. %(br)"
+	--
+	if dewdrops >= 10{
+		"\![*]\__q[OnCropChanged,0,%_index]Berries (10 Dew)\__q\n"
+	}else{
+		"Berries (10 Dew)\n"
+	}
+	--
+	if dewdrops >= 15{
+		"\![*]\__q[OnCropChanged,5,%_index]Wheat (15 Dew)\__q\n"
+	}else{
+		"Wheat (15 Dew)\n"
+	}
+	--
+	if dewdrops >= 15{
+		"\![*]\__q[OnCropChanged,1,%_index]Rice (15 Dew)\__q\n"
+	}else{
+		"Rice (15 Dew)\n"
+	}
+	--
+	if dewdrops >= 20{
+		"\![*]\__q[OnCropChanged,2,%_index]Potatoes (20 Dew)\__q\n"
+	}else{
+		"Potatoes (20 Dew)\n"
+	}
+	
+	--
+	if dewdrops >= 25{
+		"\![*]\__q[OnCropChanged,3,%_index]Corn (25 Dew)\__q\n"
+	}else{
+		"Corn (25 Dew)\n"
+	}
+	
+	--
+	if dewdrops >= 40{
+		"\![*]\__q[OnCropChanged,4,%_index]Apples (40 Dew)\__q\n"
+	}else{
+		"Apples (40 Dew)\n"
+	}
+	
+}
+
+OnCropChanged{
+	//"%reference0 and %reference1"
+	_index = TOINT(reference1)
+	_cropID = TOINT(reference0)
+	
+	farmcontent[_index] = cropNames[_cropID]
+	dewdrops -= cropPrices[_cropID]
+	--
+	"%(OnEditFarms)"
+	
+}
+
+
+
+
+ranchMenuOpeners{
+	"Ooh, more on the little creatures?"
+}
+
+OnEditRanch{
+	if SHIORI3FW.Eventid != "OnNewPen" && SHIORI3FW.Eventid != "OnNewAnimal"  ; ranchMenuOpeners
+	--
+	"%(br)%(BB)\_q"
+	--
+	//Pens, then creatures
+	_res = ""
+	for _i = 0; _i < ARRAYSIZE(penInfo); _i++ {
+		_info = penInfo[_i]
+		_name = _info[0,","]
+		_pencost = TOINT(_info[1,","])
+		_cost = TOINT(_info[3,","])
+		_res += "%(_name):   "
+		
+		if pens[_i] == 0{
+			if dewdrops >= _pencost {
+				_res += " \![*]\__q[OnNewPen,%_i]Build (%(_pencost) Dew)\__q\n"
+			}else{
+				_res += " Build (%(_pencost) Dew)\n"
+			}
+			
+		}else{
+			_res += "Has: %(animals[_i]) "
+			if animals[_i] >= TOINT(_info[2,',']) * pens[_i]{
+				if dewdrops >= _pencost{
+					_res += " \![*]\__q[OnNewPen,%_i]Build Another Pen(%(_pencost) Dew)\__q\n"
+				}else{
+					_res += " Build Another Pen (%(_pencost) Dew)\n"
+				}
+				
+			}else{
+				if dewdrops >= _cost{
+					_res += " \![*]\__q[OnNewAnimal,%_i]Buy Animal (%(_cost) Dew)\__q\n"
+				}else{
+					_res += " Buy Animal (%(_cost) Dew)\n"
+				}
+				
+			}
+			
+		}
+		
+	}
+	_res
+	--
+	"%(br)\![*]\q[Nevermind,blank]"
+
+}
+
+OnNewPen{
+	_index = TOINT(reference0)
+	_info = penInfo[_index]
+	dewdrops -= TOINT(_info[1,","])
+	pens[_index]++
+	--
+	"%(OnEditRanch)"
+}
+
+
+OnNewAnimal{
+	_index = TOINT(reference0)
+	_info = penInfo[_index]
+	dewdrops -= TOINT(_info[1,","])
+	animals[_index]++
+	--
+	"%(OnEditRanch)"
+}
+
+
+
+
+
+
+
+
+OnEditPower{
+//	if SHIORI3FW.Eventid != "OnNewFarm"; farmMenuOpeners
+	--
+	"\_q"
+	
+	--
+	_res = ""
+	for _i = 0; _i < ARRAYSIZE(powertypes); _i++ {
+		_type = powertypes[_i]
+		_res += "%_type: "
+		
+		if powersources[_i] == -1{
+			if dewdrops >= 500{
+				_res += "   \![*]\q[Research (500 Dew),OnResearchPower,%_i] "
+			}else{
+				_res += "Research (500 Dew) "
+			}
+			
+		}elseif powersources[_i] > -1{
+			if dewdrops >= powersources[_i] * 200{
+				_res += "%powersources[_i]\,    \![*]\q[Buy (%((powersources[_i]+1)*200) Dew),OnBuyPowerSource,%_i]"
+			}else{
+				_res += "Buy Another (%((powersources[_i]+1)*200) Dew)"
+			}
+			
+		}
+		_res += "\n"
+	}
+	_res
+	--
+	"%(br)\![*]\q[Back,OnTechTree]  \![*]\q[Nevermind,blank]"
+
+}
+
+OnResearchPower{
+	dewdrops -= 500
+	_index = TOINT(reference0)
+	powersources[_index] = 0
+	--
+	"%(Island)%(OnEditPower)"
+}
+
+OnBuyPowerSource{
+	dewdrops -= ((powersources[_i]+1)*200)
+	_index = TOINT(reference0)
+	powersources[_index]++
+	--
+	"%(Island)%(OnEditPower)"
+}
+
+
+
+
+OnEditFun{
+	"\_qFun Menu%(br)"
+	--
+	"\![*]\q[Prepare New Festivals,OnUnlockFestivalMenu]"
+	--
+	"%(br)\![*]\q[Back,OnTechTree]  \![*]\q[Nevermind,blank]"
+}
+
+
+OnEditReligion{
+	"%(Styrmir)%(BB)\_qBuy Orders & Upgrades%(br)"
+	--
+	_res = ""
+	for _i = 0; _i < ARRAYSIZE(Orders); _i++{
+		_rule = Orders[_i]
+		_name = _rule[0,","]
+		if rules[_i] == 0{
+			_price = TOINT(_rule[1,","])
+			if dewdrops <= _price{
+				_res += "Buy %(_name)   (%(_price) Dew)\n"
+			}else{
+				_res += "\![*]\q[Buy %(_name),OnBuyOrder,%_i]   (%(_price) Dew)\n"
+			}
+			
+		}else{
+			_res += "Owned: %(_name)\n"
+		}
+		
+	}
+	_res
+	--
+	"\n[half]\![*]\q[Back,OnTechTree]  \![*]\q[Nevermind,blank]"
+
+}
+
+
+OnBuyOrder{
+	//remove cost 
+	_rule = Orders[TOINT(reference0)]
+	_cost = _rule[1,","]
+	rules[TOINT(reference0)] = 1
+	dewdrops -= _cost
+	//effect for all instant effect ones
+	case TOINT(reference0){
+		//oops, Styrmir's Aide doesn't do anything
+		//Vegetarian is passive
+		when 2{
+			//markets
+		}
+		when 3{
+			//water purifier
+			watercap += 50 //you get a lil cap bonus too, but mostly passive
+		}
+		when 4{
+			//priest!
+			currentpriestname = fullName
+			
+		}
+		when 5{
+			//weather endurance
+			styweatherendure += 2
+		}
+		when 6{
+			//schools
+			productionmultiplier += .1
+		}
+		when 7{
+			//ranching
+			ranchingallowed = 1
+		}
+		when 8{
+			//playgrounds
+			happiness = getHappyCap
+			happinessboosts += 1
+		}
+		when 9{
+			//holy water
+			watercap += 50
+		}
+		when 10{
+			//iron tools
+			productionmultiplier += .2
+		}
+		when 11{
+			//electricity 
+			electricityallowed = 1
+		}
+		when 12{
+			//weather endurance 2
+			styweatherendure += 3
+		}
+	
+	}
+
+
+}
+
+
+
+
+OnBuyBuildings{
+	"%(Styrmir)%(BB)\_qBuy New Buildings%(br)"
+	--
+	_res = ""
+	for _i = 0; _i < ARRAYSIZE(ElectricBuildings); _i++{
+		_building = ElectricBuildings[_i]
+		_name = _building[0,","]
+		if buildings[_i] == 0{
+			_price = _building[1,","]
+			if dewdrops < price{
+				_res += "Buy %(_name)(%(_price) Dew)\n"
+			}else{
+				_res += "\![*]\q[Buy %(_name),OnBuyBuilding,%_i] (%(_price) Dew)\n"
+			}
+			
+		}else{
+			_res += "Owned: %(_name)\n"
+		}
+		
+	}
+	_res
+	--
+	"\n[half]\![*]\q[Back,OnTechTree]  \![*]\q[Nevermind,blank]"
+
+}
+
+
+OnBuyBuilding{
+	//remove cost 
+	_build = ElectricBuildings[TOINT(reference0)]
+	_cost = _build[1,","]
+	dewdrops -= _cost
+	buildings[TOINT(reference0)] = 1
+	
+	powerconsumption += 1
+	happinessproduction += 1
+	--
+	"%(OnBuyBuildings)"
+}
+
+
+
+
+OnUpgradeMenu{
+	"\_qUpgrade Menu%(br)"
+	--
+	if dewdrops >= (watercapsbought+1) * 30 {
+		"\![*]\q[Upgrade Water Capacity,OnUpgradeWater] (%((watercapsbought+1) * 30) Dew)\n"
+	}else{
+		"Upgrade Water Capacity (%((watercapsbought+1) * 30) Dew)\n"
+	}
+	
+	--
+	if	dewdrops >= (foodcapsbought+1) * 40 {
+	"\![*]\q[Upgrade Food Capacity,OnUpgradeFood](%((foodcapsbought+1) * 40) Dew)\n"
+	}else{
+		"Upgrade Food Capacity (%((foodcapsbought+1) * 40) Dew)\n"
+	}
+	--
+	if dewdrops >= (batteriesbought+1) * 60 {
+		"\![*]\q[Upgrade Power Capacity,OnUpgradePower](%((batteriesbought+1) * 60) Dew)\n"
+	}else{
+		"Upgrade Power Capacity (%((batteriesbought+1) * 60) Dew)\n"
+	}
+	--
+	if dewdrops >= (housingbought+1) * 30 {
+		"\![*]\q[Upgrade Housing,OnUpgradeHousing] (%((housingbought+1) * 20) Dew)\n"
+	}else{
+		"Upgrade Housing (%((housingbought+1) * 20) Dew)\n"
+	}
+	--
+	"Coming Soon: Upgrade Temple %(br)"
+	--
+	"%(br)\![*]\q[Back,OnTechTree]  \![*]\q[Nevermind,blank]"
+	//"Styrmir's Weather Endurance: current is %styweatherendure"
+	
+}
+
+
+
+OnUpgradeWater{
+	dewdrops -= (watercapsbought+1) * 30
+	watercapsbought++
+	watercap += watercapsbought * 200
+	
+	OnUpgradeMenu
+}
+
+OnUpgradeFood{
+	dewdrops -= (foodcapsbought+1) * 30
+	foodcapsbought++
+	foodcap += foodcapsbought * 100
+	
+	OnUpgradeMenu
+}
+
+OnUpgradePower{
+	dewdrops -= (batteriesbought+1) * 30
+	batteriesbought++
+	batterycap += batteriesbought * 100
+	
+	OnUpgradeMenu
+}
+
+OnUpgradeHousing{
+	dewdrops -= (housingbought+1) * 30
+	housingbought++
+	housingavailable += housingbought * 3
+	
+	if housingavailable > 450{
+		housingstage = 4
+	}elseif housingavailable > 300{
+		housingstage = 3
+	}elseif housingavailable > 150{
+		housingstage = 2
+	}elseif housingavailable > 75{
+		housingstage = 1
+	}else{
+		housingstage = 0
+	}
+	
+	OnUpgradeMenu
+}
+
+
+
+
+
+
+
+
+OnUnlockFestivalMenu{
+	"%(Styrmir)Ooh, you want to prepare new festivals?%(br)%(BB)\_q"
+	--
+	OutputFestivalsUnlock
+	--
+	"%(br)\![*]\q[Back,OnTechTree]  \![*]\q[Nevermind,blank]"
+}
+
+OutputFestivalsUnlock : all{
+	for _i = 0; _i < ARRAYSIZE(Festivals); _i++{
+		_thisfestival = Festivals[_i]
+		_unlocked = unlockedfestivals[_i]
+		"%(_thisfestival[0]):      "
+		if _unlocked == 1{
+			"Already Bought"
+		}else{
+			"\![*]\q[Buy (%(1+_i * 12) Dew),OnUnlockFestival,%_i]"
+		}
+		"\n"
+	}
+}
+
+
+OnUnlockFestival{
+	
+	_index = TOINT(reference0)
+	_cost = 1+_index * 12
+	
+	if dewdrops >= _cost{
+		//If the villagers were complaining for fun
+		if villagerwant == 11{
+			villagerwant = -1
+			dewdrops += (housingstage+1) * 3
+		}
+		
+		amusement++
+		unlockedfestivals[_index] = 1
+		dewdrops -= _cost
+		
+		
+		"%(Styrmir)Oh, \w6look at them. \w8They'll be so happy."
+		
+	}else{
+		"%(StyrmirLook)Oh, \w6you don't have enough Dew Drops for this."
+	}
+	--
+	"%(br)\![*]\q[Back,OnUnlockFestivalMenu]  \![*]\q[Nevermind,blank]"
+	
+}
+
+
+
+OnCheckForFestival{
+	//go through each festival and see if any can be activated, then pick one at random and reset the timer
+	for _i = 0; _i < ARRAYSIZE(Festivals); _i++{
+		_thisfestival = Festivals[_i]
+		_unlocked = unlockedfestivals[_i]
+		_reqs = _thisfestival[1,","]
+		if EVAL(_reqs){
+			if _unlocked == 1{
+				"\![raise,OnActivateFestival,%_i]"
+			}else{
+				""
+			}
+		}
+		
+	}
+
+}
+
+OnActivateFestival{
+	_index = TOINT(reference0)
+	
+	if happiness < getHappyCap / 4{ //festivals are more often if they're unhappy
+		festivaltimer = 20 + RAND(10)
+	}elseif happiness < getHappyCap / 3{ 
+		festivaltimer = 20 + RAND(30)
+	}elseif happiness < getHappyCap / 2{ 
+		festivaltimer = 20 + RAND(60)
+	}else{
+		festivaltimer = 20 + RAND(100)
+	}
+	
+	timeuntilfestivalend = 10
+	currentfestival = (Festivals[_i])[0]
+	
+	
+}
+
+
+
+unlockedbase : array{
+	for _i = 0; _i < 30; _i++{
+		0
+	}
+}
+

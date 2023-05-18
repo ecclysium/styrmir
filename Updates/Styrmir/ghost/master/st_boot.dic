@@ -1,0 +1,148 @@
+
+
+OnFirstBoot
+{
+	OnFirstBootVars
+	"\1\s[-1]%(Styrmir)Hello, and welcome to devotion, human! I have picked you to be my aide."
+}
+
+OnFirstBootVars{
+	stroke = 0
+	LastTalk = ""
+	version = "V0.0.4"
+	fontsize = 12
+	timealive = 0
+	timeopen = 0
+	
+	pets = 0
+	punches = 0
+	tickles = 0
+	
+	
+	dewdrops = 30 //"money"
+	weather = -1 //if Styrmir is giving the village a lil boost
+	weathertimer = -1 //how long Styrmir is giving the weather
+	styweatherendure = 3 //Styrmir's timer for how long will give weather
+	productionmultiplier = 1
+	
+	mood = 0 //0 is neutral, 3 is happy, 6 is sad, 9 is angry
+	amusement = 0
+	discomfort = 0
+	anger = 0
+	
+	food = 50
+	foodcap = 300
+	foodcapsbought = 0
+	farms = 1
+	farmcontent = "berries" //you start off with something!
+	
+	totalfoodproduced = 0
+	
+	ranchingallowed = 0
+	pens = IARRAY
+	pens = unlockedbase //num of pens of each type (order of Cows, Sheep, Chickens)
+	animals = IARRAY 
+	animals = unlockedbase //total nums of animal of each type
+	//I doubt we'll ever have more than like 5 animals available, but there's room (relies on database to size)
+	
+	textiles = 0 //from sheep! currently does nothing....
+	
+	watercontent = 300
+	watercap = 500
+	watercapsbought = 0
+	
+	electricityallowed = 0
+	electricity = 0
+	batterycap = 0
+	batteriesbought = 0
+	powertypes = "Lightning Rods,Windmills,Solar Panels,Steam Generator,Water Wheels"
+	powersources = IARRAY
+	powersources ,= -1 //lightning
+	powersources ,= -1 //wind
+	powersources ,= -1 //sun
+	powersources ,= -1 //water
+	powersources ,= -1 //water
+	powerconsumption = 0 //from buildings
+	
+	
+	buildings = IARRAY
+	buildings = unlockedbase //it works as a general large array maker
+	
+	
+	happiness = getHappyCap
+	happinessboosts  = 1 //modifier
+	happinessproduction  = 0 //from buildings
+	
+	population = 8
+	housingavailable = 20
+	housingbought = 1
+	housingstage = 0 //for art and "Allowance"
+	villagerwant = -1 //0-10 are weather wants
+	
+	//misc
+	largestcowcontest = "" //only triggers after the dialogue-- gets set to a villager name in the future, for now just a non-null value
+	cowlocation = -1 //:pensive: no cow yet
+	currentpriestname = "" //no priest yet
+	
+	//Festivals!
+	unlockedfestivals = IARRAY
+	unlockedfestivals = unlockedbase //a function gens it!
+	festivaltimer = -1 //until another festival check
+	timeuntilfestivalend = 0
+	currentfestival = "None"
+	
+	
+
+	recentdeaths = 0 //if a bunch of people die quickly Styrmir will be sadge :(
+	deaths = 0
+	rules = IARRAY
+	rules ,= unlockedbase //30 long array of 0s
+	rules[0] = 1 //you're Styrmir's Aide!
+
+}
+
+OnInitialize
+{
+	version = "V0.0.4"
+	timeopen = 0
+	//If you want some variables to reset on boot, put them here. This event will happen even if you add other events like OnGhostChanged
+	//OnInitialize is a NOTIFY event! That means it cannot return scripts. This event is only meant for things like variable changes. See this page on Ukadoc for more info: https://ukagakadreamteam.github.io/ukadoc/manual/spec_shiori3.html
+	
+	//If you add new variables in updates, I recommend initializing them like so:
+	//if !ISVAR("NewVariable"); NewVariable = 0
+	//This means that it will only set the new variable if the user doesn't already have it, so that their variables don't get overwritten
+	
+	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
+	{
+		LastTalk = ""
+	}
+}
+
+OnBoot
+{
+	_temp = SPLIT(SHIORI3FW.UserBirthday,":")
+	_user_birthday = "%(_temp)[1]/%(_temp[2])" //M/D, if you want it D/M you can switch it around
+	_today = "%(_month)/%(_day)" //Again, switch this around if using D/M
+	
+	"\1\s[-1]%(Styrmir)"
+	--
+	//if _today == _user_birthday
+	//{
+	//	"%(Styrmir)It is %(username)'s birthday today.\w8 Happy birthday, %(username).\w8.\w8 can remove it entirely."
+	//}
+	if _today == "1/1" //You can add whatever cool dates you want with more elseifs here
+	{
+		"%(Styrmir)It's new year's day.\w8 Happy %(year),\w4 %(username)."
+	}
+	else //Normal boot
+	{
+		"%(Styrmir)They don’t really have much right now.\w4.\w4. But maybe you can help change that!"
+	}
+}
+
+OnClose
+{
+	"%(Styrmir)They don’t really have much right now.\w4.\w4. But maybe you can help change that!"
+	--
+	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
+}

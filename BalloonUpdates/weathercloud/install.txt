@@ -1,0 +1,5 @@
+charset,Shift_JIS
+type,balloon
+name,Weather Cloud
+directory,weathercloud
+refresh,1

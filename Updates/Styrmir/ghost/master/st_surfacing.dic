@@ -1,0 +1,235 @@
+//SURFACING
+
+
+
+br{
+	"\n\n[half]"
+
+}
+
+BB{
+	if SHIORI3FW.BalloonName == "Weather Cloud"{
+		case mood{
+			when 3{ //happy
+				"\b[6]"
+			}
+			when 6{ //sad
+				"\b[10]"
+			
+			}
+			when 9{	//angry
+				"\b[14]"
+			
+			}
+			others{ //neutral
+				"\b2"
+			}
+		
+		}
+	}else{
+		"\b2"
+	}	
+	
+}
+
+SB{
+	if SHIORI3FW.BalloonName == "Weather Cloud"{
+		case mood{
+			when 3{ //happy
+				"\b[4]"
+			}
+			when 6{ //sad
+				"\b[8]"
+			
+			}
+			when 9{	//angry
+				"\b[12]"
+			
+			}
+			others{ //neutral
+				"\b1"
+			}
+		
+		}
+	}
+	
+}
+
+
+Styrmir{
+
+	"%(StyrBase)"
+	--
+//	"\i[100]"
+	--
+	//Arm intervals for weather
+	"%(weatherArm)"
+	--
+	"%(Island)"
+
+
+}
+
+
+StyrmirLook{
+
+	"%(StyrBase)"
+	--
+//	"\i[100]"
+	--
+//Arm intervals for weather
+	"%(weatherArm)"
+	--
+	"\i[502]"
+	--
+	"%(Island)"
+
+
+}
+
+
+StyrmirPoint{
+	"%(StyrBase)"
+	--
+//	"\i[100]"
+	--
+	//Arm intervals for weather
+	"%(weatherArm)"
+	--
+	//Eyes
+	"\i[500]"
+	--
+	"%(Point)"
+	--
+	"%(Island)"
+
+
+}
+
+StyrBase{
+
+	case mood{
+		when 3{ //happy
+			"\0\s[20]"
+		}
+		when 6{ //sad
+			"\0\s[30]\i[1010]"
+		
+		}
+		when 9{	//angry
+			"\0\s[40]\i[1611]" //1611 is wind
+		
+		}
+		others{ //neutral
+			"\0\s[10]"
+			--
+			if mood == 1{ //wind 
+				"\i[950]\i[110]%(Frown)"
+			}else{
+				"\i[1000]"
+			}
+		}
+	
+	}
+}
+
+
+weatherArm{
+	case weather{
+		when 0{
+			//sun
+			"\i[351]\i[1603]\i[1503]"
+		}
+		when 1{
+			//clouds
+			"\i[350]\i[1601]\i[1501]\i[1611]"
+		}
+		when 3{
+			//rain
+			"\i[352]\i[1605]\i[1505]"
+		}
+		when 5{
+			//thunder
+			"\i[353]\i[1607]\i[1507]"
+		}
+		when 7{
+			//snow
+			"\i[352]\i[1609]\i[1505]"
+		}
+
+	}
+}
+
+
+Point{
+	//Hand
+	"\i[302]"
+
+}
+
+Frown{
+	"\i[610]"
+	--
+	if mood < 3 {
+		"\i[1010]"
+	}
+}
+
+Smile{
+	"\i[620]"
+}
+
+
+Island{
+	
+	//housing - 5 stages
+	/*
+	if housingavailable > 450{
+		"\i[708]"
+	}elseif housingavailable > 300{
+		"\i[706]"
+	}elseif housingavailable > 150{
+		"\i[704]"
+	}elseif housingavailable > 75{
+		"\i[702]"
+	}else{
+		"\i[700]"
+	}
+	*/
+	_stage = housingstage * 2
+	"\i[70%(_stage)]"
+	
+	--
+	//POWER
+	if powersources[0] > 0{
+		"\i[750]"
+	}
+	--
+	if powersources[1] > 0{
+		"\i[752]"
+	}
+	--
+	if powersources[2] > 0{
+		"\i[754]"
+	}
+	--
+	if powersources[4] > 0{
+		"\i[756]"
+	}
+	--
+	//temple
+	
+	--
+	//festival
+	--
+	"%(Cow)" //Cow
+}
+
+
+//Cow.
+Cow{
+	if cowlocation > -1 && cowlocation <= 5{
+		"\i[120%cowlocation]"
+	}
+
+}

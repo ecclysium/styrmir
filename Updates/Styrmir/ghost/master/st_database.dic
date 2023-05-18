@@ -1,0 +1,81 @@
+//DATABASE
+
+
+
+
+
+
+Festivals: array{
+	"Song For Styrmir,1"
+	"Praise of Identity,population>25"
+	"Wind Festival,mood<3"
+	"Beginning of Life,population>50"
+	"Praise the Sun,mood>2&&mood<6"	
+	"Sprite Secrets,farms>2"
+	"Rain Dance,mood>5&&mood<9"
+	"Harvest Festival,farms>3"
+	"Song of the Snow,mood>5&&mood<9"
+	"In Honor Of Family,population>100"
+	"Power of the Storm,mood>=9"
+	"Death's Sting,population>200"
+
+}
+
+
+
+Orders: array{
+	"Styrmir's Aide,0" //present by default-- you're You! 	//0
+	"Vegetarian,100"										//1
+	"Markets,100"											//2
+	"Water Purifier,250"									//3
+	"Appointed Priest,500" //unlock temple?					//4
+	"Longer Weather,100"									//5
+	"Schools,175"											//6
+	"Ranching,200" //Unlock ranching						//7
+	"Playgrounds,100"										//8
+	"Holy Water,200"										//9
+	"Iron Tools,200"										//10
+	"Electricity,200" //unlock electricity					//11
+	"Longer Weather II,500"									//12
+}
+
+
+ElectricBuildings: array{
+	"Streetlights,150" 									 	//0
+	"Park,200"												//1
+	"Shopping Centre,300"									//2
+	"Library,350"											//3
+	"Novelty Shop,100" 										//4
+	"Inn,200"												//5
+	"Circus,275"											//6
+}
+
+
+
+cropNames : array{
+	"berries"
+	"rice"
+	"potatoes"
+	"corn"
+	"apples"
+	"wheat"
+}
+
+cropPrices : array{
+	10
+	15
+	20
+	25
+	40
+	15
+}
+
+
+//[name][pencost][penmax][animalcost]
+penInfo : array{
+	"Cow Pen,100,8,50"
+	"Sheep Pen,75,10,40"
+	"Chicken Coop,50,15,20"
+}
+
+

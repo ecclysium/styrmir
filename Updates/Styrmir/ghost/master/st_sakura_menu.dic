@@ -1,0 +1,392 @@
+SakuraMenuGreetings : nonoverlap
+{
+	"%(StyrmirLook)"
+	--
+	case mood{
+		when 3{ //happy
+			"Oh! It's GREAT to see you!"
+			"Heehee! Hey!"
+		}
+		when 6{ //sad
+			"%(Styrmir)Hic.\w4.\w4. what is it, \w6human?"
+		
+		}
+		when 9{	//angry
+			"I'm angry!"
+		
+		}
+		others{ //neutral
+			//""
+			"Hello."
+			"How can I help you?"
+			"Hello, human."
+			"Do you have advice?"
+			"Oh! Hello, human."
+			"Human, it's good to see you!"
+		}
+	
+	}
+	
+}
+
+//Because there is an all modifier here, you don't need to write -- between menu options
+OnSakuraMenu : all
+{
+	"%(Styrmir)%(BB)\![set,autoscroll,disable]"
+	if SHIORI3FW.Eventid == "OnMouseDoubleClick"; SakuraMenuGreetings //The check here is so they won't comment if you click the back button. Remove if you prefer
+	
+	"%(br)\_q"
+	
+	"\![*]\q[Talk to me,OnAiTalk]"
+	if LastTalk != ""; "  \![*]\q[Say that again,OnLastTalk]"
+	"%(br)"
+	
+	"\![*]\q[Chat with Styrmir,OnInteractMenu]%(br)"
+	"\![*]\q[Ask For Weather,OnWeatherAsk]\n"
+	"\![*]\q[Help the village,OnTechTree]\n"
+	//"\![*]\q[Settings,OnSettings]%(br)"
+	"%(br)"
+	"\![*]\q[Nevermind,blank]"	
+	--
+	if cowlocation == 7{
+		"           \_b[img\COW.png,inline]"
+	}
+	
+	"\n\f[align,center]\f[height,-1]%(br)\__q[OnSettings]\_b[img\GEAR.png,inline]\__q ------------------------------ \__q[OnStats]\_b[img\STATS.png,inline]\__q\n"
+	
+	"%(version), %(getTime)\nDew Drops: %dewdrops ~~~ Festival: %currentfestival"
+
+}
+
+getTime{
+	if hour > 12{
+		"%(hour-12)"
+	}else{
+		"%hour"
+	}
+	--
+	":"
+	--
+	if minute > 9{
+		"%minute"
+	}else{
+		"0%minute"
+	}
+
+}
+
+OnLastTalk
+{
+	LastTalk
+}
+
+
+OnSettings{
+	"\_q"
+	--
+	"\![*]\q[Change talk rate,OnTalkRateMenu]\n"
+	--
+	"\q[ - ,OnDecFont]Font Size: %fontsize\q[ + ,OnIncFont]"
+	--
+	"%(br)\![*]\q[Reset?,OnAskReset]"
+	--
+	if cowlocation == 8{
+		"\n                                                      \f[align,right]\_b[img\COW.png,inline]"
+	}  
+	--
+	"\f[align,left]%(br)\![*]\q[Back,OnSakuraMenu]  \![*]\q[Nevermind,blank]"
+}
+
+OnIncFont{
+	fontsize++
+	"%(OnSettings)"
+}
+
+OnDecFont{
+	fontsize--
+	"%(OnSettings)"
+}
+
+OnAskReset{
+	"%(StyrmirLook)Are you sure?\_q%(br)"
+	--
+	"\![*]\q[Yes.,OnFirstBoot]\n"
+	--
+	"\![*]\q[Nope!,OnSettings]\n"
+	
+	
+}
+
+
+OnStats{
+	"\_q"
+	--
+	"Total Villager Deaths: %deaths\nTotal Food Produced: %totalfoodproduced%(br)Pets: %pets\nPunches: %punches\nTickles: %tickles\nMinutes Alive: %timealive"
+	--
+	if cowlocation == 9{
+		"\n\_b[img\COW.png,inline]"
+	}
+	--
+	"%(br)\![*]\q[Back,OnSakuraMenu]  \![*]\q[Nevermind,blank]"
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+interactOpener{
+	"%(Styrmir)Oh? You have something you want to tell me, mortal?"
+}
+
+OnInteractMenu : all{
+	"%(interactOpener)%(br)\_q%(BB)"
+	
+
+	
+	"\![*]\q[Tell Sad Story,OnTellSadStory]\n"
+	
+	"\![*]\q[Tell Joke,OnTellJoke]\n"
+	
+	"\![*]\q[Tickle,OnMouseWheel.Sakura,,,,,Wings]\n"
+	
+	"\![*]\q[Punch,OnPunch.Sakura]\n"
+	
+	"\![*]\q[Compliment,OnCompliment]"
+	if cowlocation == 10{
+		"\n                                         \_b[img\COW.png,inline]~\n"
+	}else{
+		"%(br)"
+	}
+	"\![*]\q[Nevermind,blank]"	
+
+}
+
+
+OnTellSadStory{
+	discomfort += 4
+	if discomfort > 10{
+		MoodForce(6,"story")
+	}
+	"%(Styrmir)That's so sad! \w8I can't believe the woodsman would do that.\w4.\w4."
+
+}
+
+OnTellJoke{
+	amusement +=2
+	if amusement > 10{
+		MoodForce(3,"joke")
+	}
+	
+	"%(Styrmir)Oh, \w6that's a good one, \w6human!"
+
+}
+
+OnCompliment{
+	amusement++
+	dewdrops++
+	"%(Styrmir)Aw, \w6you're making me blush."
+
+}
+
+
+
+OnWeatherAsk{
+	"What sort of weather do they need?"
+	--
+	"%(br)"
+	--
+	case mood{
+		when 3{ //happy
+			"\![*]\q[Sun,OnGiveSun,1]\n"
+			--
+			"\![*]\q[Cloud Cover,OnGiveCloud,0]\n"
+			--
+			"\![*]\q[Rain,OnGiveRain,0]\n"
+			--
+			"\![*]\q[Thunder,OnGiveThunder,0]\n"
+			--
+			"\![*]\q[Snow,OnGiveSnow,0]\n"
+			
+		}
+		when 6{ //sad
+			"\![*]\q[Sun,OnGiveSun,0]\n"
+			--
+			"\![*]\q[Cloud Cover,OnGiveCloud,0]\n"
+			--
+			"\![*]\q[Rain,OnGiveRain,1]\n"
+			--
+			"\![*]\q[Thunder,OnGiveThunder,0]\n"
+			--
+			"\![*]\q[Snow,OnGiveSnow,1]\n"
+		
+		}
+		when 9{	//angry
+			"\![*]\q[Sun,OnGiveSun,0]\n"
+			--
+			"\![*]\q[Cloud Cover,OnGiveCloud,0]\n"
+			--
+			"\![*]\q[Rain,OnGiveRain,0]\n"
+			--
+			"\![*]\q[Thunder,OnGiveThunder,1]\n"
+			--
+			"\![*]\q[Snow,OnGiveSnow,0]\n"
+		
+		}
+		others{ //neutral
+			"\![*]\q[Sun,OnGiveSun,0]\n"
+			--
+			"\![*]\q[Cloud Cover,OnGiveCloud,1]\n"
+			--
+			"\![*]\q[Rain,OnGiveRain,0]\n"
+			--
+			"\![*]\q[Thunder,OnGiveThunder,0]\n"
+			--
+			"\![*]\q[Snow,OnGiveSnow,0]\n"
+		}
+	
+	}
+
+}
+
+//0
+OnGiveSun{
+	if reference0 == 1{
+		weather = 0
+		weathertimer = styweatherendure
+		"%(Styrmir)And sunshine will cover the lands!"
+	}else{
+		"I can only do sun when I'm feeling ok."
+	}
+	if villagerwant == 0{
+		villagerwant = -1
+		dewdrops += (housingstage+1) * 3
+	}
+}
+
+//1
+OnGiveCloud{
+	if reference0 == 1{
+		
+		weather = 1
+		weathertimer = styweatherendure
+		"Aw, I don't want them to be hurt by how bright I am. \w8%(Styrmir)Here you go!"
+	}else{
+		"%(Styrmir)Augh, my clouds keep evaporating! \w8I'm too bright!"
+	}
+	if villagerwant == 1{
+		villagerwant = -1
+		dewdrops += (housingstage+1) * 3
+	}
+}
+
+//3
+OnGiveRain{
+	if reference0 == 1{
+		weather = 3
+		weathertimer = styweatherendure
+		"They.\w4.\w4. need even more water? %(Styrmir)Here.\w4.\w4. glad it helps.\w4.\w4."
+	}else{
+		"I'm too happy for rain! \w8It just evaporates!"
+	}
+	if villagerwant == 3{
+		villagerwant = -1
+		dewdrops += (housingstage+1) * 3
+	}
+}
+
+//5
+OnGiveThunder{
+	if reference0 == 1{
+		"Oh! %(Styrmir)May my clouds and anger rumble through them.\w4.\w4."
+		weather = 5
+		weathertimer = styweatherendure
+	}else{
+		"I have to be angry to manage any thunder, human. "
+	}
+	if villagerwant == 5{
+		villagerwant = -1
+		dewdrops += (housingstage+1) * 3
+	}
+}
+
+//7
+OnGiveSnow{
+	if reference0 == 1{
+		weather = 7
+		weathertimer = styweatherendure
+		"Sure! %(Styrmir)Let me bring in a snowstorm!"
+	}else{
+		"I'm sorry, I can only cause snow when I'm sad."
+	}
+	if villagerwant == 7{
+		villagerwant = -1
+		dewdrops += (housingstage+1) * 3
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//SETTINGS
+OnTalkRateMenu : all
+{	
+	//This is just setting up a label, you may need to add to it or tweak it if you change what rates are available
+	_talkrate = "Off"
+	if aitalkinterval == 30; _talkrate = "30 seconds"
+	elseif aitalkinterval == 60; _talkrate = "1 minute"
+	elseif aitalkinterval == 180; _talkrate = "3 minutes"
+	elseif aitalkinterval == 300; _talkrate = "5 minutes"
+	elseif aitalkinterval == 600; _talkrate = "10 minutes"
+	
+	"%(Styrmir)%(BB)\![set,autoscroll,disable]\_q"
+	"Current interval: %(_talkrate)\n\n"
+	
+	"\![*]\q[Off,OnTalkRateChange,0]\n"
+	"\![*]\q[30 seconds,OnTalkRateChange,30]\n"
+	"\![*]\q[1 minute,OnTalkRateChange,60]\n"
+	"\![*]\q[3 minutes,OnTalkRateChange,180]\n"
+	"\![*]\q[5 minutes,OnTalkRateChange,300]\n"
+	"\![*]\q[10 minutes,OnTalkRateChange,600]\n"
+	"\n"
+	"\![*]\q[Back,OnSakuraMenu]  \![*]\q[Nevermind,blank]"
+}
+
+OnTalkRateChange
+{
+	aitalkinterval = TOINT(reference0)
+}
+
+
+
+
+
+

@@ -1,0 +1,11 @@
+
+
+
+font.color.r,255
+font.color.g,254
+font.color.b,230
+
+font.shadowcolor.r,31
+font.shadowcolor.g,31
+font.shadowcolor.b,31
+

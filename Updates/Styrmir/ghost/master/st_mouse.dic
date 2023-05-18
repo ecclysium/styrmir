@@ -1,0 +1,136 @@
+//Separate from the menus because you could put other interactions here, like poking or booping or punching or asking about various hotspots
+OnMouseDoubleClick
+{
+	if reference5 == 0 //reference5 is the mouse button being clicked, in this case a left click
+	{
+		//reference3 is which character is being clicked
+		//If you want to add double click interactions, reference4 will be the name of the hitbox the mouse is over
+		if reference3 == 0
+		{
+			if reference4 == "Island"{
+				OnIslandInfo
+			}elseif reference4 == "Head"{
+				OnPunch.Sakura
+			}else{
+				OnSakuraMenu
+			}
+			
+		}
+		else
+		{
+			OnKeroMenu
+		}
+	}
+}
+
+OnMouseMove
+{
+	if reference4 != ""
+	{
+		stroke++
+		
+		if stroke % 50 == 0
+		{
+			if reference3 == 0; OnMouseMove.Sakura
+			else; OnMouseMove.Kero
+		}
+	}
+}
+
+OnMouseMove.Sakura
+{
+	if reference4 == "Wings"
+	{
+		if RAND(3) == 0; "%(Styrmir)Oh! That kind of tickles!"
+		
+		
+	}else{
+		//pets!
+		pets++
+	}
+}
+
+
+OnMouseWheel
+{
+	if reference4 != ""
+	{
+		stroke++
+		
+		if stroke % 40 == 0
+		{
+			if reference3 == 0; OnMouseWheel.Sakura
+			else; OnMouseWheel.Kero
+		}
+	}
+}
+
+OnMouseWheel.Sakura
+{
+	if reference4 == "Wings"
+	{
+		if amusement == 10{
+			MoodForce(3,"tickling")
+			"%(Styrmir)BWAHAHA-- I can't stop laughing!"
+		}else{
+			OnUpdateMood
+			if mood == 3{
+				"HAHAHAHAHA--"
+				"YOU KEEP TICKLING ME!"
+				"IT'S TOO MUCH, IT'S TOO MUCH!"
+			}else{
+				"%(Styrmir)H-Hey, that tickles!"
+				"%(Styrmir)Haha- ha--"
+				if amusement > 3{
+					"%(Styrmir)Human! Human, it's too much!"
+				}
+				
+			}
+			
+		}
+		
+		amusement++
+		
+	}
+	tickles++
+}
+
+
+OnPunch.Sakura{
+	if mood == 9{
+		anger++
+		"%(StyrmirLook)I WILL NOT TOLERATE THIS INSOLENCE."
+	}else{
+		
+		if anger >= 15{
+			MoodForce(9,"punching")
+			"%(StyrmirLook)%(Styrmir)NOW YOU'VE DONE IT, MORTAL."
+		}else{
+			anger+=2
+			discomfort++
+			OnUpdateMood
+			"%(StyrmirLook)%(Frown)Hey-- what was that for!?"
+			"%(StyrmirLook)%(Frown)Don't hit me!"
+		}
+		
+	}
+	punches++
+
+}
+
+OnMouseMove.Kero
+{
+	if reference4 == "head"
+	{
+		if discomfort > 0{
+			discomfort--
+		}
+		OnUpdateMood
+	//	"\1\s[10]Petting..."
+	}
+}
+
+OnMouseLeaveAll
+{
+	stroke = 0
+}

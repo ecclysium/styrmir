@@ -1,0 +1,9 @@
+
+font.color.r,255
+font.color.g,255
+font.color.b,255
+
+font.shadowcolor.r,27
+font.shadowcolor.g,36
+font.shadowcolor.b,55
+

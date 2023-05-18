@@ -1,0 +1,1150 @@
+
+descript
+{
+	version,1
+}
+
+//—————————————————————————————— Sakura surfaces ——————————————————————————————
+
+
+//NEUTRAL
+surface10
+{
+	element0,overlay,surface0.png,0,0
+	
+	//NEUTRAL WINGS	
+	
+		animation100.interval,runonce
+		animation100.pattern1,alternativestart,(101,102)
+
+		animation101.interval,never
+		animation101.pattern1,overlay,1801,0,0,0
+		animation101.pattern2,overlay,1802,40,0,0
+		animation101.pattern3,overlay,1803,40,0,0
+		animation101.pattern4,overlay,1802,40,0,0
+		animation101.pattern5,overlay,1801,30,0,0
+		animation101.pattern6,overlay,1801,700,0,0
+		animation101.pattern7,alternativestart,(101,102)
+		animation101.pattern8,overlay,-1
+		
+		animation102.interval,never
+		animation102.pattern1,overlay,1801,0,0,0
+		animation102.pattern2,overlay,1802,50,0,0
+		animation102.pattern3,overlay,1803,50,0,0
+		animation102.pattern4,overlay,1802,50,0,0
+		animation102.pattern5,overlay,1801,40,0,0
+		animation102.pattern6,overlay,1801,7500,0,0
+		animation102.pattern7,alternativestart,(101,102)
+		animation102.pattern8,overlay,-1
+		
+	//SAD WINGS
+		animation110.interval,never
+		animation110.pattern0,parallelstop,(100,101,102)
+		animation110.pattern1,alternativestart,(111,112)
+
+		animation111.interval,never
+		animation111.pattern1,overlay,1807,0,0,0
+		animation111.pattern2,overlay,1808,50,0,0
+		animation111.pattern3,overlay,1809,50,0,0
+		animation111.pattern4,overlay,1808,50,0,0
+		animation111.pattern5,overlay,1807,40,0,0
+		animation111.pattern6,overlay,1807,1500,0,0
+		animation111.pattern7,alternativestart,(111,112)
+		animation111.pattern8,overlay,-1
+		
+		animation112.interval,never
+		animation112.pattern1,overlay,1807,0,0,0
+		animation112.pattern2,overlay,1808,60,0,0
+		animation112.pattern3,overlay,1809,60,0,0
+		animation112.pattern4,overlay,1808,60,0,0
+		animation112.pattern5,overlay,1807,70,0,0
+		animation112.pattern6,overlay,1807,9500,0,0
+		animation112.pattern7,alternativestart,(111,112)
+		animation112.pattern8,overlay,-1
+		
+
+	//NEUTRAL HAIR/CROWN
+		
+		animation200.interval,runonce
+		animation200.pattern1,alternativestart,(201,202)
+
+		animation201.interval,never
+		animation201.pattern1,overlay,1901,0,0,0
+		animation201.pattern2,overlay,1902,200,0,0
+		animation201.pattern3,overlay,1903,200,0,0
+		animation201.pattern4,overlay,1901,200,0,0
+		animation201.pattern5,overlay,1901,2200,0,0
+		animation201.pattern6,alternativestart,(201,202)
+		animation201.pattern8,overlay,-1
+		
+		animation202.interval,never
+		animation202.pattern1,overlay,1901,0,0,0
+		animation202.pattern2,overlay,1902,200,0,0
+		animation202.pattern3,overlay,1903,200,0,0
+		animation202.pattern4,overlay,1901,200,0,0
+		animation202.pattern5,overlay,1901,8200,0,0
+		animation202.pattern6,alternativestart,(201,202)
+		animation202.pattern8,overlay,-1
+		
+	//NEUTRAL
+	
+		//HOLDING ISLAND
+		
+		animation300.interval,runonce
+		animation300.pattern0,overlay,1501,0,0,0
+		
+		//POINTING
+		
+		animation302.interval,never
+		animation302.pattern0,parallelstop,(300,350)
+		animation302.pattern1,overlay,1503,0,0,0
+		
+		//MAKING WEATHER (OVERCAST/CLOUDY)
+		
+		animation350.interval,never
+		animation350.pattern0,parallelstop,(300,302)
+		animation350.pattern1,overlay,1502,0,0,0
+		
+	//NEUTRAL BODY
+	
+		animation400.interval,runonce
+		animation400.pattern0,overlay,1701,0,0,0
+		
+	
+	
+	//NEUTRAL EYES
+		
+		//LOOKING AT ISLAND
+	
+		animation500.interval,runonce
+		animation500.pattern0,overlay,1101,0,0,0
+		animation500.pattern1,parallelstop,(503)
+		//animation500.pattern2,start,1,0,10-1000
+
+		animation501.interval,random,4
+		animation501.pattern0,overlay,1101,0,0,0
+		animation501.pattern1,overlay,1102,40,0,0
+		animation501.pattern2,overlay,1103,40,0,0
+		animation501.pattern3,overlay,-1,20,0,0
+		
+		//LOOKING AT USER
+		animation502.interval,never
+		animation502.pattern0,overlay,1104,0,0,0
+		animation502.pattern1,parallelstop,(501)
+		//animation502.pattern2,start,100,0,10-1000
+
+		animation503.interval,random,4
+		animation503.pattern0,overlay,1104,0,0,0
+		animation503.pattern1,overlay,1105,40,0,0
+		animation503.pattern2,overlay,1103,40,0,0
+		animation503.pattern3,overlay,-1,20,0,0
+		
+		
+	//NEUTRAL MOUTH
+	
+		//REGULAR TALKING
+		
+		animation600.interval,talk,4
+		animation600.pattern0,alternativestart,(602,603,604,605,606)
+		
+		animation601.interval,runonce
+		animation601.pattern0,parallelstop,(611)
+		animation601.pattern0,overlay,1201,0,0,0
+		//animation11.pattern1,parallelstop,()
+		
+		animation602.interval,never
+		animation602.pattern0,overlay,1201,100,0,0
+		animation602.pattern1,overlay,1202,130,0,0
+		animation602.pattern2,overlay,1203,130,0,0
+		animation602.pattern3,overlay,1204,130,0,0
+		animation602.pattern4,overlay,-1,100,0,0
+
+		animation603.interval,never
+		animation603.pattern0,overlay,1201,140,0,0
+		animation603.pattern1,overlay,-1,100,0,0
+
+		animation604.interval,never
+		animation604.pattern0,overlay,1202,140,0,0
+		animation604.pattern1,overlay,-1,100,0,0
+		
+		animation605.interval,never
+		animation605.pattern0,overlay,1203,140,0,0
+		animation605.pattern1,overlay,-1,100,0,0
+		
+		animation606.interval,never
+		animation606.pattern0,overlay,1204,140,0,0
+		animation606.pattern1,overlay,-1,100,0,0
+		
+		//Non-smiling
+		animation610.interval,never
+		animation610.pattern0,parallelstop,(600)
+		animation610.pattern1,parallelstart,(611)
+		animation610.pattern2,overlay,1217
+		
+		animation611.interval,talk,4
+		animation611.pattern0,alternativestart,(612,613,614,615,616)
+		animation611.pattern1,overlay,1217
+		
+		animation612.interval,never
+		animation612.pattern0,overlay,1217,100,0,0
+		animation612.pattern1,overlay,1218,130,0,0
+		animation612.pattern2,overlay,1219,130,0,0
+		animation612.pattern3,overlay,1220,130,0,0
+		animation612.pattern4,overlay,-1,100,0,0
+
+		animation613.interval,never
+		animation613.pattern0,overlay,1217,140,0,0
+		animation613.pattern1,overlay,-1,100,0,0
+
+		animation614.interval,never
+		animation614.pattern0,overlay,1218,140,0,0
+		animation614.pattern1,overlay,-1,100,0,0
+		
+		animation615.interval,never
+		animation615.pattern0,overlay,1219,140,0,0
+		animation615.pattern1,overlay,-1,100,0,0
+		
+		animation616.interval,never
+		animation616.pattern0,overlay,1220,140,0,0
+		animation616.pattern1,overlay,-1,100,0,0
+		
+	//NEUTRAL ARM
+	
+		//HOLDING ISLAND
+		
+		animation900.interval,runonce
+		animation900.pattern0,overlay,1401,0,0,0
+		
+		
+	//ARM DECOR
+		//wind decor
+		animation950.interval,never
+		animation950.pattern0,overlay,1305,0,0,0
+		
+		
+	//NEUTRAL BROWS
+	
+		//NEUTRAL
+		
+		animation1000.interval,never
+		animation1000.pattern0,overlay,1301,0,0,0
+		
+		//SAD
+		animation1010.interval,never
+		animation1010.pattern0,overlay,1303,0,0,0
+		animation1010.pattern1,stop,1000
+		
+}
+
+//HAPPY
+surface20
+{
+	element0,overlay,surface0.png,0,0
+
+	//HAPPY WINGS
+	
+		animation100.interval,runonce
+		animation100.pattern1,alternativestart,(101,102)
+
+		animation101.interval,never
+		animation101.pattern1,overlay,1804,0,0,0
+		animation101.pattern2,overlay,1805,40,0,0
+		animation101.pattern3,overlay,1806,40,0,0
+		animation101.pattern4,overlay,1805,40,0,0
+		animation101.pattern5,overlay,1804,30,0,0
+		animation101.pattern6,overlay,1804,700,0,0
+		animation101.pattern7,alternativestart,(101,102)
+		animation101.pattern8,overlay,-1
+		
+		animation102.interval,never
+		animation102.pattern1,overlay,1804,0,0,0
+		animation102.pattern2,overlay,1805,50,0,0
+		animation102.pattern3,overlay,1806,50,0,0
+		animation102.pattern4,overlay,1805,50,0,0
+		animation102.pattern5,overlay,1804,40,0,0
+		animation102.pattern6,overlay,1804,7500,0,0
+		animation102.pattern7,alternativestart,(101,102)
+		animation102.pattern8,overlay,-1	
+		
+	//HAPPY HAIR/CROWN
+		
+		animation200.interval,runonce
+		animation200.pattern1,alternativestart,(201,202)
+
+		animation201.interval,never
+		animation201.pattern1,overlay,1904,0,0,0
+		animation201.pattern2,overlay,1905,200,0,0
+		animation201.pattern3,overlay,1906,200,0,0
+		animation201.pattern4,overlay,1904,200,0,0
+		animation201.pattern5,overlay,1904,1200,0,0
+		animation201.pattern6,alternativestart,(201,202)
+		animation201.pattern8,overlay,-1
+		
+		animation202.interval,never
+		animation202.pattern1,overlay,1904,0,0,0
+		animation202.pattern2,overlay,1905,200,0,0
+		animation202.pattern3,overlay,1906,200,0,0
+		animation202.pattern4,overlay,1904,200,0,0
+		animation202.pattern5,overlay,1904,4200,0,0
+		animation202.pattern6,alternativestart,(201,202)
+		animation202.pattern8,overlay,-1
+		
+
+		
+	//HAPPY
+		
+		//HOLDING ISLAND
+		
+		animation300.interval,runonce
+		animation300.pattern0,overlay,1504,0,0,0
+
+		
+		animation301.interval,never
+		animation301.pattern0,stop,300
+		animation301.pattern1,overlay,1505,0,0,0
+		animation301.pattern2,overlay,1506,500,0,0
+		animation301.pattern3,overlay,1507,500,0,0
+		animation301.pattern4,overlay,1506,500,0,0
+		animation301.pattern5,overlay,-1,50,0,0
+		animation301.pattern6,start,300
+		
+		//POINTING
+		
+		animation302.interval,never
+		animation302.pattern0,parallelstop,(300)
+		animation302.pattern1,overlay,1508,0,0,0
+		
+				
+		//MAKING WEATHER (SUNNY)
+		
+		animation351.interval,never
+		animation351.pattern0,parallelstop,(300,301,302)
+		animation351.pattern1,overlay,1505,0,0,0
+		//animation20.pattern1,parallelstop,(25)
+		// animation2.pattern2,start,1,0,10-1000
+	
+			
+	//HAPPY BODY
+	
+		animation400.interval,runonce
+		animation400.pattern0,overlay,1702,0,0,0
+		
+	//HAPPY EYES
+		
+		//LOOKING AT ISLAND
+	
+		animation500.interval,runonce
+		animation500.pattern0,overlay,1106,0,0,0
+		animation500.pattern1,parallelstop,(503)
+		//animation500.pattern2,start,1,0,10-1000
+
+		animation501.interval,random,4
+		animation501.pattern0,overlay,1106,0,0,0
+		animation501.pattern1,overlay,1107,40,0,0
+		animation501.pattern2,overlay,1108,40,0,0
+		animation501.pattern3,overlay,-1,20,0,0
+		
+		//LOOKING AT USER
+		
+		animation502.interval,never
+		animation502.pattern0,overlay,1109,0,0,0
+		animation502.pattern1,parallelstop,(501)
+		//animation502.pattern2,start,1,0,10-1000
+
+		animation503.interval,random,4
+		animation503.pattern0,overlay,1109,0,0,0
+		animation503.pattern1,overlay,1110,40,0,0
+		animation503.pattern2,overlay,1108,40,0,0
+		animation503.pattern3,overlay,-1,20,0,0
+		
+		
+		
+		
+	//HAPPY MOUTH
+	
+		//REGULAR TALKING
+		
+		animation600.interval,talk,4
+		animation600.pattern0,alternativestart,(602,603,604,605,606)
+		
+		animation601.interval,runonce
+		animation601.pattern0,overlay,1205,0,0,0
+		animation601.pattern1,parallelstop,(611)
+
+		
+		animation602.interval,never
+		animation602.pattern0,overlay,1205,100,0,0
+		animation602.pattern1,overlay,1206,130,0,0
+		animation602.pattern2,overlay,1207,130,0,0
+		animation602.pattern3,overlay,1208,130,0,0
+		animation602.pattern4,overlay,-1,100,0,0
+
+		animation603.interval,never
+		animation603.pattern0,overlay,1205,140,0,0
+		animation603.pattern1,overlay,-1,100,0,0
+
+		animation604.interval,never
+		animation604.pattern0,overlay,1206,140,0,0
+		animation604.pattern1,overlay,-1,100,0,0
+		
+		animation605.interval,never
+		animation605.pattern0,overlay,1207,140,0,0
+		animation605.pattern1,overlay,-1,100,0,0
+		
+		animation606.interval,never
+		animation606.pattern0,overlay,1208,140,0,0
+		animation606.pattern1,overlay,-1,100,0,0
+
+	//Non-smiling
+		animation610.interval,never
+		animation610.pattern0,parallelstop,(600)
+		animation610.pattern1,parallelstart,(611)
+		animation610.pattern2,overlay,1221
+		
+		animation611.interval,talk,4
+		animation611.pattern0,alternativestart,(612,613,614,615,616)
+		animation611.pattern1,overlay,1221
+		
+		animation612.interval,never
+		animation612.pattern0,overlay,1221,100,0,0
+		animation612.pattern1,overlay,1222,130,0,0
+		animation612.pattern2,overlay,1223,130,0,0
+		animation612.pattern3,overlay,1224,130,0,0
+		animation612.pattern4,overlay,-1,100,0,0
+
+		animation613.interval,never
+		animation613.pattern0,overlay,1221,140,0,0
+		animation613.pattern1,overlay,-1,100,0,0
+
+		animation614.interval,never
+		animation614.pattern0,overlay,1222,140,0,0
+		animation614.pattern1,overlay,-1,100,0,0
+		
+		animation615.interval,never
+		animation615.pattern0,overlay,1223,140,0,0
+		animation615.pattern1,overlay,-1,100,0,0
+		
+		animation616.interval,never
+		animation616.pattern0,overlay,1224,140,0,0
+		animation616.pattern1,overlay,-1,100,0,0		
+		
+	//HAPPY ARM
+	
+		//HOLDING ISLAND
+		
+		animation900.interval,runonce
+		animation900.pattern0,overlay,1402,0,0,0		
+		
+	//HAPPY BROWS
+	
+		//NEUTRAL
+		
+		animation1000.interval,runonce
+		animation1000.pattern0,overlay,1302,0,0,0
+
+}
+
+
+//SAD
+surface30
+{
+	element0,overlay,surface0.png,0,0		
+
+		
+	//SAD WINGS
+	
+		animation100.interval,runonce
+		animation100.pattern1,alternativestart,(101,102)
+
+		animation101.interval,never
+		animation101.pattern1,overlay,1807,0,0,0
+		animation101.pattern2,overlay,1808,50,0,0
+		animation101.pattern3,overlay,1809,50,0,0
+		animation101.pattern4,overlay,1808,50,0,0
+		animation101.pattern5,overlay,1807,40,0,0
+		animation101.pattern6,overlay,1807,1500,0,0
+		animation101.pattern7,alternativestart,(101,102)
+		animation101.pattern8,overlay,-1
+		
+		animation102.interval,never
+		animation102.pattern1,overlay,1807,0,0,0
+		animation102.pattern2,overlay,1808,60,0,0
+		animation102.pattern3,overlay,1809,60,0,0
+		animation102.pattern4,overlay,1808,60,0,0
+		animation102.pattern5,overlay,1807,70,0,0
+		animation102.pattern6,overlay,1807,9500,0,0
+		animation102.pattern7,alternativestart,(101,102)
+		animation102.pattern8,overlay,-1
+		
+	//SAD HAIR/CROWN
+		
+		animation200.interval,runonce
+		animation200.pattern1,alternativestart,(201,202)
+
+		animation201.interval,never
+		animation201.pattern1,overlay,1907,0,0,0
+		animation201.pattern2,overlay,1908,200,0,0
+		animation201.pattern3,overlay,1909,200,0,0
+		animation201.pattern4,overlay,1907,200,0,0
+		animation201.pattern5,overlay,1907,2200,0,0
+		animation201.pattern6,alternativestart,(201,202)
+		animation201.pattern8,overlay,-1
+		
+		animation202.interval,never
+		animation202.pattern1,overlay,1907,0,0,0
+		animation202.pattern2,overlay,1908,200,0,0
+		animation202.pattern3,overlay,1909,200,0,0
+		animation202.pattern4,overlay,1907,200,0,0
+		animation202.pattern5,overlay,1907,8200,0,0
+		animation202.pattern6,alternativestart,(201,202)
+		animation202.pattern8,overlay,-1
+		
+	//SAD
+		
+		//HOLDING ISLAND
+		
+		animation300.interval,runonce
+		animation300.pattern0,overlay,1509,0,0,0
+
+		
+		animation301.interval,never
+		animation301.pattern0,stop,300
+		animation301.pattern1,overlay,1510,0,0,0
+		animation301.pattern2,overlay,1511,100,0,0
+		animation301.pattern3,overlay,1512,100,0,0
+		animation301.pattern4,overlay,1511,100,0,0
+		animation301.pattern5,overlay,-1,100,0,0
+		animation301.pattern6,start,301
+		
+		//POINTING
+		
+		animation302.interval,never
+		animation302.pattern0,parallelstop,(300)
+		animation302.pattern1,overlay,1513,0,0,0
+		
+		
+		
+
+
+		//MAKING WEATHER (RAIN)
+		
+		animation352.interval,never
+		animation352.pattern0,parallelstop,(300,301,302)
+		animation352.pattern1,overlay,1510,0,0,0
+		//animation24.pattern1,parallelstop,(21)
+		// animation2.pattern2,start,1,0,10-1000
+		
+	//SAD BODY
+	
+		animation400.interval,runonce
+		animation400.pattern0,overlay,1703,0,0,0
+		
+	
+		
+	//SAD EYES
+		
+		//LOOKING AT ISLAND
+	
+		animation500.interval,runonce
+		animation500.pattern0,overlay,1111,0,0,0
+		animation500.pattern1,parallelstop,(503)
+		//animation500.pattern2,start,1,0,10-1000
+
+		animation501.interval,random,4
+		animation501.pattern0,overlay,1111,0,0,0
+		animation501.pattern1,overlay,1112,40,0,0
+		animation501.pattern2,overlay,1113,40,0,0
+		animation501.pattern3,overlay,-1,20,0,0
+		
+		//LOOKING AT USER
+		
+		animation502.interval,never
+		animation502.pattern0,overlay,1114,0,0,0
+		animation502.pattern1,parallelstop,(501)
+		//animation502.pattern2,start,1,0,10-1000
+
+		animation503.interval,random,4
+		animation503.pattern0,overlay,1114,0,0,0
+		animation503.pattern1,overlay,1115,40,0,0
+		animation503.pattern2,overlay,1113,40,0,0
+		animation503.pattern3,overlay,-1,20,0,0
+
+		
+	//SAD MOUTH
+	
+		//REGULAR TALKING
+		
+		animation600.interval,talk,4
+		animation600.pattern0,alternativestart,(602,603,604,605,606)
+		
+		animation601.interval,runonce
+		animation601.pattern0,overlay,1209,0,0,0
+		animation601.pattern1,parallelstop,(621)
+	
+		
+		animation602.interval,never
+		animation602.pattern0,overlay,1209,100,0,0
+		animation602.pattern1,overlay,1210,130,0,0
+		animation602.pattern2,overlay,1211,130,0,0
+		animation602.pattern3,overlay,1212,130,0,0
+		animation602.pattern4,overlay,-1,100,0,0
+
+		animation603.interval,never
+		animation603.pattern0,overlay,1209,140,0,0
+		animation603.pattern1,overlay,-1,100,0,0
+
+		animation604.interval,never
+		animation604.pattern0,overlay,1210,140,0,0
+		animation604.pattern1,overlay,-1,100,0,0
+		
+		animation605.interval,never
+		animation605.pattern0,overlay,1211,140,0,0
+		animation605.pattern1,overlay,-1,100,0,0
+		
+		animation606.interval,never
+		animation606.pattern0,overlay,1212,140,0,0
+		animation606.pattern1,overlay,-1,100,0,0
+		
+		//Smiling
+		animation620.interval,never
+		animation620.pattern0,parallelstop,(600)
+		animation620.pattern1,parallelstart,(621)
+		animation620.pattern2,overlay,1225
+		
+		animation621.interval,talk,4
+		animation621.pattern0,alternativestart,(622,623,624,625,626)
+		animation621.pattern1,overlay,1225
+		
+		animation622.interval,never
+		animation622.pattern0,overlay,1225,100,0,0
+		animation622.pattern1,overlay,1226,130,0,0
+		animation622.pattern2,overlay,1227,130,0,0
+		animation622.pattern3,overlay,1228,130,0,0
+		animation622.pattern4,overlay,-1,100,0,0
+
+		animation623.interval,never
+		animation623.pattern0,overlay,1225,140,0,0
+		animation623.pattern1,overlay,-1,100,0,0
+
+		animation624.interval,never
+		animation624.pattern0,overlay,1226,140,0,0
+		animation624.pattern1,overlay,-1,100,0,0
+		
+		animation625.interval,never
+		animation625.pattern0,overlay,1227,140,0,0
+		animation625.pattern1,overlay,-1,100,0,0
+		
+		animation626.interval,never
+		animation626.pattern0,overlay,1228,140,0,0
+		animation626.pattern1,overlay,-1,100,0,0
+		
+	//SAD ARM
+	
+		//HOLDING ISLAND
+		
+		animation900.interval,runonce
+		animation900.pattern0,overlay,1403,0,0,0
+	
+	//SAD BROWS
+
+		//NEUTRAL
+		
+		animation1000.interval,never
+		animation1000.pattern0,overlay,1301,0,0,0
+		animation1000.pattern1,stop,1010
+		
+		//SAD
+		animation1010.interval,never
+		animation1010.pattern0,overlay,1303,0,0,0
+		animation1010.pattern1,stop,1000
+}
+
+//MAD
+surface40
+{
+	element0,overlay,surface0.png,0,0	
+
+		
+	//ANGRY WINGS
+	
+		animation100.interval,runonce
+		animation100.pattern1,alternativestart,(101,102)
+
+		animation101.interval,never
+		animation101.pattern1,overlay,1810,0,0,0
+		animation101.pattern2,overlay,1811,40,0,0
+		animation101.pattern3,overlay,1812,40,0,0
+		animation101.pattern4,overlay,1811,40,0,0
+		animation101.pattern5,overlay,1810,30,0,0
+		animation101.pattern6,overlay,1810,600,0,0
+		animation101.pattern7,alternativestart,(101,102)
+		animation101.pattern8,overlay,-1
+		
+		animation102.interval,never
+		animation102.pattern1,overlay,1810,0,0,0
+		animation102.pattern2,overlay,1811,50,0,0
+		animation102.pattern3,overlay,1812,50,0,0
+		animation102.pattern4,overlay,1811,50,0,0
+		animation102.pattern5,overlay,1810,40,0,0
+		animation102.pattern6,overlay,1810,5500,0,0
+		animation102.pattern7,alternativestart,(101,102)
+		animation102.pattern8,overlay,-1
+		
+	//ANGRY HAIR/CROWN
+		
+		animation200.interval,runonce
+		animation200.pattern1,alternativestart,(201,202)
+
+		animation201.interval,never
+		animation201.pattern1,overlay,1910,0,0,0
+		animation201.pattern2,overlay,1911,100,0,0
+		animation201.pattern3,overlay,1912,100,0,0
+		animation201.pattern4,overlay,1910,100,0,0
+		animation201.pattern5,overlay,1910,1500,0,0
+		animation201.pattern6,alternativestart,(201,202)
+		animation201.pattern8,overlay,-1
+		
+		animation202.interval,never
+		animation202.pattern1,overlay,1910,0,0,0
+		animation202.pattern2,overlay,1911,200,0,0
+		animation202.pattern3,overlay,1912,200,0,0
+		animation202.pattern4,overlay,1910,200,0,0
+		animation202.pattern5,overlay,1910,2200,0,0
+		animation202.pattern6,alternativestart,(201,202)
+		animation202.pattern8,overlay,-1
+
+		
+	//ANGRY
+		
+		//HOLDING ISLAND
+		
+		animation300.interval,runonce
+		animation300.pattern0,overlay,1514,0,0,0
+
+		
+		//POINTING
+		
+		animation302.interval,never
+		animation302.pattern0,parallelstop,(300)
+		animation302.pattern1,overlay,1516,0,0,0
+
+		
+		//MAKING WEATHER (LIGHTNING)
+		
+		animation353.interval,never
+		animation353.pattern0,parallelstop,(300,302)
+		animation353.pattern1,overlay,1515,0,0,0	
+		
+	//ANGRY BODY
+	
+		animation400.interval,runonce
+		animation400.pattern0,overlay,1704,0,0,0
+		
+	//ANGRY EYES
+		
+		//LOOKING AT ISLAND
+	
+		animation500.interval,runonce
+		animation500.pattern0,overlay,1116,0,0,0
+		animation500.pattern1,parallelstop,(503)
+		//animation500.pattern2,start,1,0,10-1000
+
+		animation501.interval,random,4
+		animation501.pattern0,overlay,1116,0,0,0
+		animation501.pattern1,overlay,1117,40,0,0
+		animation501.pattern2,overlay,1118,40,0,0
+		animation501.pattern3,overlay,-1,20,0,0
+		
+		//LOOKING AT USER
+		
+		animation502.interval,never
+		animation502.pattern0,overlay,1119,0,0,0
+		animation502.pattern1,parallelstop,(501)
+		//animation502.pattern2,start,1,0,10-1000
+
+		animation503.interval,random,4
+		animation503.pattern0,overlay,1119,0,0,0
+		animation503.pattern1,overlay,1120,40,0,0
+		animation503.pattern2,overlay,1118,40,0,0
+		animation503.pattern3,overlay,-1,20,0,0
+		
+	//ANGRY MOUTH
+	
+		//REGULAR TALKING
+		
+		animation600.interval,talk,4
+		animation600.pattern0,alternativestart,(602,603,604,605,606)
+		
+		animation601.interval,runonce
+		animation601.pattern0,overlay,1213,0,0,0
+		animation601.pattern1,parallelstop,(621)
+		//animation74.pattern2,start,74
+		
+		animation602.interval,never
+		animation602.pattern0,overlay,1213,100,0,0
+		animation602.pattern1,overlay,1214,130,0,0
+		animation602.pattern2,overlay,1215,130,0,0
+		animation602.pattern3,overlay,1216,130,0,0
+		animation602.pattern4,overlay,-1,100,0,0
+
+		animation603.interval,never
+		animation603.pattern0,overlay,1213,140,0,0
+		animation603.pattern1,overlay,-1,100,0,0
+
+		animation604.interval,never
+		animation604.pattern0,overlay,1214,140,0,0
+		animation604.pattern1,overlay,-1,100,0,0
+		
+		animation605.interval,never
+		animation605.pattern0,overlay,1215,140,0,0
+		animation605.pattern1,overlay,-1,100,0,0
+		
+		animation606.interval,never
+		animation606.pattern0,overlay,1216,140,0,0
+		animation606.pattern1,overlay,-1,100,0,0
+		
+		
+		//Smiling
+		animation620.interval,never
+		animation620.pattern0,parallelstop,(600)
+		animation620.pattern1,parallelstart,(621)
+		animation620.pattern2,overlay,1229
+		
+		animation621.interval,talk,4
+		animation621.pattern0,alternativestart,(622,623,624,625,626)
+		animation621.pattern1,overlay,1229
+		
+		animation622.interval,never
+		animation622.pattern0,overlay,1229,100,0,0
+		animation622.pattern1,overlay,1230,130,0,0
+		animation622.pattern2,overlay,1231,130,0,0
+		animation622.pattern3,overlay,1232,130,0,0
+		animation622.pattern4,overlay,-1,100,0,0
+
+		animation623.interval,never
+		animation623.pattern0,overlay,1229,140,0,0
+		animation623.pattern1,overlay,-1,100,0,0
+
+		animation624.interval,never
+		animation624.pattern0,overlay,1230,140,0,0
+		animation624.pattern1,overlay,-1,100,0,0
+		
+		animation625.interval,never
+		animation625.pattern0,overlay,1231,140,0,0
+		animation625.pattern1,overlay,-1,100,0,0
+		
+		animation626.interval,never
+		animation626.pattern0,overlay,1232,140,0,0
+		animation626.pattern1,overlay,-1,100,0,0
+
+		
+	//ANGRY ARM
+	
+		//HOLDING ISLAND
+		
+		animation900.interval,runonce
+		animation900.pattern0,overlay,1404,0,0,0
+
+		
+	//ANGRY BROWS
+	
+		//NEUTRAL
+		
+		animation1000.interval,runonce
+		animation1000.pattern0,overlay,1304,0,0,0
+}
+
+
+surface.append0-100
+{
+
+collision5,226,118,313,206,Head
+collisionex7,Island,polygon,195,298,167,252,105,246,82,289,85,319,111,426,128,335,175,334
+collisionex10,Wings,polygon,512,414,493,392,459,388,429,412,429,421,413,410,386,415,370,440,354,438,323,392,415,307,353,239,337,223,336,209,345,184,351,193,359,161,383,143,354,143,293,60,243,52,193,138,197,169,208,192,206,199,151,259,132,316,193,438,133,431,108,430,108,404,95,386,73,386,49,407,17,427,3,180,5,5,252,2,550,40,547,210,533,397 
+	
+
+
+
+//ISLAND
+		
+		//stage 0
+		animation700.interval,never
+		animation700.pattern0,overlay,1601,0,0,0
+		animation700.pattern2,start,701,0,10-1000
+		
+		//stage 0 water
+		animation701.interval,never
+		animation701.pattern0,overlay,1601,0,0,0
+		animation701.pattern1,overlay,1602,100,0,0
+		animation701.pattern2,overlay,1603,200,0,0
+		animation701.pattern3,start,701
+		
+		//stage 1
+		animation702.interval,never
+		animation702.pattern0,overlay,1604,0,0,0
+		animation702.pattern2,start,703,0,10-1000
+		
+		//stage 1 water
+		animation703.interval,never
+		animation703.pattern0,overlay,1604,0,0,0
+		animation703.pattern1,overlay,1605,100,0,0
+		animation703.pattern2,overlay,1606,200,0,0
+		animation703.pattern3,start,703
+		
+		//stage 2
+		animation704.interval,never
+		animation704.pattern0,overlay,1607,0,0,0
+		animation704.pattern2,start,705,0,10-1000
+		
+		//stage 2 water
+		animation705.interval,never
+		animation705.pattern0,overlay,1607,0,0,0
+		animation705.pattern1,overlay,1608,100,0,0
+		animation705.pattern2,overlay,1609,200,0,0
+		animation705.pattern3,start,705
+		
+		
+		//stage 3
+		animation706.interval,never
+		animation706.pattern0,overlay,1610,0,0,0
+		animation706.pattern2,start,707,0,10-1000
+		
+		//stage 3 water
+		animation707.interval,never
+		animation707.pattern0,overlay,1610,0,0,0
+		animation707.pattern1,overlay,1611,100,0,0
+		animation707.pattern2,overlay,1612,200,0,0
+		animation707.pattern3,start,707
+		
+		
+		//stage 4
+		animation708.interval,never
+		animation708.pattern0,overlay,1613,0,0,0
+		animation708.pattern2,start,709,0,10-1000
+		
+		//stage 4 water
+		animation709.interval,never
+		animation709.pattern0,overlay,1613,0,0,0
+		animation709.pattern1,overlay,1614,100,0,0
+		animation709.pattern2,overlay,1615,200,0,0
+		animation709.pattern3,start,709
+		
+//ISLAND POWER OPTIONS
+	//lightning rods
+		animation750.interval,never
+		animation750.pattern0,overlay,1619,0,0,0
+		
+	//windmills
+		animation752.interval,never
+		animation752.pattern0,overlay,1616,0,0,0
+		
+	//solar panels
+		animation754.interval,never
+		animation754.pattern0,overlay,1617,0,0,0
+		
+	//water wheel
+		animation756.interval,never
+		animation756.pattern0,overlay,1618,0,0,0
+		
+
+//TELEPORTING COW!?!
+
+	//Left side clouds
+		animation1200.interval,never
+		animation1200.pattern0,overlay,50,0,70,375
+	
+	//Right side clouds
+		animation1201.interval,never
+		animation1201.pattern0,overlay,50,0,420,430
+	
+	//Shoulder
+		animation1202.interval,never
+		animation1202.pattern0,overlay,50,0,190,205
+	
+	//Hair
+		animation1203.interval,never
+		animation1203.pattern0,overlay,50,0,295,98
+	
+	//Ear
+		animation1204.interval,never
+		animation1204.pattern0,overlay,50,0,325,133
+	
+	//Bridge!?
+		animation1205.interval,never
+		animation1205.pattern0,overlay,50,0,105,283
+
+		
+//SPARKLES
+	
+	//NEUTRAL SPARKLES
+		
+		animation1500.interval,never
+		animation1500.pattern0,overlay,10001,0,0,0
+		//animation0.pattern1,parallelstop,()
+	    //animation0.pattern2,start,1,0,10-1000
+
+		animation1501.interval,never
+		animation1501.pattern0,stop,1500
+		animation1501.pattern1,overlay,10001,100,0,0
+		animation1501.pattern2,overlay,10002,100,0,0
+		animation1501.pattern3,overlay,10003,140,0,0
+		animation1501.pattern4,overlay,10002,100,0,0
+		animation1501.pattern5,overlay,10001,100,0,0
+		animation1501.pattern6,overlay,-1,30,0,0
+		animation1501.pattern7,start,1501
+		
+	//HAPPY SPARKLES
+		
+		animation1502.interval,never
+		animation1502.pattern0,overlay,10004,0,0,0
+		//animation0.pattern1,parallelstop,()
+	    //animation0.pattern2,start,1,0,10-1000
+
+		animation1503.interval,never
+		animation1503.pattern0,stop,1502
+		animation1503.pattern1,overlay,10004,100,0,0
+		animation1503.pattern2,overlay,10005,100,0,0
+		animation1503.pattern3,overlay,10006,140,0,0
+		animation1503.pattern4,overlay,10005,100,0,0
+		animation1503.pattern5,overlay,10004,100,0,0
+		animation1503.pattern6,overlay,-1,30,0,0
+		animation1503.pattern7,start,1503
+		 
+	//SAD SPARKLES
+		
+		animation1504.interval,never
+		animation1504.pattern0,overlay,10007,0,0,0
+		//animation0.pattern1,parallelstop,()
+	    //animation0.pattern2,start,1,0,10-1000
+
+		animation1505.interval,never
+		animation1505.pattern0,stop,1504
+		animation1505.pattern1,overlay,10007,100,0,0
+		animation1505.pattern2,overlay,10008,100,0,0
+		animation1505.pattern3,overlay,10009,140,0,0
+		animation1505.pattern4,overlay,10008,100,0,0
+		animation1505.pattern5,overlay,10007,100,0,0
+		animation1505.pattern6,overlay,-1,30,0,0
+		animation1505.pattern7,start,1505
+		
+	//ANGRY SPARKLES
+		
+		animation1506.interval,never
+		animation1506.pattern0,overlay,10010,0,0,0
+		//animation0.pattern1,parallelstop,()
+	    //animation0.pattern2,start,1,0,10-1000
+
+		animation1507.interval,never
+		animation1507.pattern0,stop,1506
+		animation1507.pattern1,overlay,10010,100,0,0
+		animation1507.pattern2,overlay,10011,100,0,0
+		animation1507.pattern3,overlay,10012,140,0,0
+		animation1507.pattern4,overlay,10011,100,0,0
+		animation1507.pattern5,overlay,10010,100,0,0
+		animation1507.pattern6,overlay,-1,30,0,0
+		animation1507.pattern7,start,1507
+		
+//WEATHER EFFECT
+
+	//NEUTRAL
+	
+		//OVERCAST/CLOUDY
+		animation1600.interval,never
+		animation1600.pattern0,overlay,11001,0,0,0
+		//animation2.pattern1,parallelstop,()
+	    //animation2.pattern2,start,1,0,10-1000
+
+		animation1601.interval,never
+		animation1601.pattern1,overlay,11001,0,0,0
+		animation1601.pattern2,overlay,11002,500,0,0
+		animation1601.pattern3,overlay,11003,500,0,0
+		animation1601.pattern4,overlay,11002,700,0,0
+		animation1601.pattern5,overlay,11001,500,0,0
+		animation1601.pattern7,start,1601
+		
+
+	
+		
+	//HAPPY
+	
+		//SUNNY
+		
+		animation1602.interval,never
+		animation1602.pattern0,overlay,11004,0,0,0
+		//animation2.pattern1,parallelstop,()
+		//animation2.pattern2,start,1,0,10-1000
+		
+		animation1603.interval,never
+		animation1603.pattern0,stop,1602
+		animation1603.pattern1,overlay,11004,0,0,0
+		animation1603.pattern2,overlay,11005,100,0,0
+		animation1603.pattern3,overlay,11006,100,0,0
+		animation1603.pattern4,overlay,11005,100,0,0
+		animation1603.pattern6,start,1603
+
+		
+	//SAD
+	
+		//RAIN
+		
+		animation1604.interval,never
+		animation1604.pattern0,overlay,11007,0,0,0
+		//animation2.pattern1,parallelstop,()
+		//animation2.pattern2,start,1,0,10-1000
+	
+		animation1605.interval,never
+		animation1605.pattern0,stop,1604
+		animation1605.pattern1,overlay,11007,0,0,0
+		animation1605.pattern2,overlay,11008,100,0,0
+		animation1605.pattern3,overlay,11009,100,0,0
+		animation1605.pattern4,overlay,11008,100,0,0
+		animation1605.pattern6,start,1605
+
+		
+	//ANGRY
+	
+		//LIGHTNING
+
+		animation1606.interval,never
+		animation1606.pattern0,overlay,11010,0,0,0
+		//animation2.pattern1,parallelstop,()
+		//animation2.pattern2,start,1,0,10-1000
+		
+		animation1607.interval,never 
+		animation1607.pattern0,stop,1606
+		animation1607.pattern1,overlay,11010,0,0,0
+		animation1607.pattern2,overlay,11010,5,0,0
+		animation1607.pattern3,overlay,11011,10,0,0
+		animation1607.pattern4,overlay,11010,5,0,0
+		animation1607.pattern6,start,1606
+		
+	//SAD
+	
+		//SNOW
+		
+		//animation1608.interval,never
+		//animation1608.pattern0,overlay,11015,0,0,0
+		//animation2.pattern1,parallelstop,()
+		//animation2.pattern2,start,1,0,10-1000
+	
+		animation1609.interval,never
+		animation1609.pattern1,overlay,11015,0,0,0
+		animation1609.pattern2,overlay,11016,200,0,0
+		animation1609.pattern3,overlay,11017,200,0,0
+		animation1609.pattern5,overlay,11016,200,0,0
+		animation1609.pattern6,start,1609
+		
+	//NEUTRAL
+	
+		//WIMDY
+		animation1610.interval,never
+		animation1610.pattern0,overlay,11012,0,0,0
+
+		animation1611.interval,never
+		animation1611.pattern1,overlay,11012,0,0,0
+		animation1611.pattern2,overlay,11013,200,0,0
+		animation1611.pattern3,overlay,11014,200,0,0
+		animation1611.pattern5,overlay,-1,200,0,0
+		animation1611.pattern6,overlay,-1,400-5000,0,0
+		animation1611.pattern7,start,1611
+	}
