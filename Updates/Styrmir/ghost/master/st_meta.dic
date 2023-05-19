@@ -68,11 +68,11 @@ OnUpdateComplete
 {
 	if reference0 == "none"
 	{
-		"%(Styrmir)There are no new files."
+		"%(Styrmir)Hm. Nothing new."
 	}
 	else
 	{
-		"%(Styrmir)Update complete."
+		"%(Styrmir)Maybe there's new things for all you little humans."
 	}
 }
 

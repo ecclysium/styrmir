@@ -6,7 +6,7 @@ ghost/master/evilpicsdontopen/heyyyy.png13fcf8799ae2ef7c30cae93d0b1d91b6size=6
 ghost/master/evilpicsdontopen/humantaste.pngb324991512f4dcb71797830fb92d78dfsize=187364date=2023-05-17T17:17:58
 ghost/master/evilpicsdontopen/yummyvillager.pnge5ccc77fa7ef284559957a7e00bfa234size=34838date=2023-05-16T20:34:35
 ghost/master/evilpicsdontopen/yummyvillagers.png7f92ef7ea9462f73c1f59be12eba3113size=269884date=2023-05-16T20:42:37
-ghost/master/icon.ico9c41d7163faa06827774a4a8a279173esize=99797date=2023-02-02T02:36:51
+ghost/master/icon.icoa3676ff20637958bc69510867380829esize=22494date=2023-05-18T22:50:31
 ghost/master/img/COW.png26832f557ddbf751f25d9eca67ceb736size=765date=2023-05-17T16:29:44
 ghost/master/img/GEAR.png666b5c3acb046c2662fb615febe3b625size=420date=2023-05-17T14:56:32
 ghost/master/img/STATS.pngca2ce79fb77d32e3e4cf02373d2b7539size=492date=2023-05-17T15:28:14
@@ -14,8 +14,7 @@ ghost/master/st_aitalk.dic4d1c1ffa69680981fe2627f42e2115ddsize=17128date=2023
 ghost/master/st_boot.dic42d5804a762bf1d1917efff57fc80640size=7141date=2023-05-18T22:19:24
 ghost/master/st_database.dica180272ad6930a8aed0a86cb8afd7be9size=1560date=2023-05-18T21:18:10
 ghost/master/st_island.dic5043c611570b47e5b4f6d8c5d5c297f7size=12545date=2023-05-18T22:08:55
-ghost/master/st_kero_menu.dic52ed2a49081abf76e6785c65f3817a3dsize=1091date=2023-05-17T09:42:04
-ghost/master/st_meta.dicd87951a453d399c984d5f75d6eba4064size=3591date=2023-05-18T13:23:08
+ghost/master/st_meta.dic5ee4e5e80e61586ebb7ff050be18bad4size=3619date=2023-05-18T22:39:19
 ghost/master/st_mood.dic35c432e113d07d50fecfdbb590c5cb7csize=1633date=2023-05-18T21:25:51
 ghost/master/st_mouse.dic2391890e20dc5cff81f513bcaeead6a8size=5068date=2023-05-18T20:56:41
 ghost/master/st_other.dic44508e28250df9f50b6554a11ce2681asize=6304date=2023-05-18T22:28:19
@@ -24,7 +23,7 @@ ghost/master/st_surfacing.dic078034b33f83574c9206fb371a83f5b6size=3179date=20
 ghost/master/st_tech.dicf5056a8cd458505809fce5953be61b5csize=10843date=2023-05-18T22:08:55
 ghost/master/st_word.dicf8726ec640b31aa3f557ecd79500c068size=5964date=2023-05-18T16:45:10
 ghost/master/yaya.dll56e3af56c88e696cea1f39d53b239cefsize=880640date=2022-09-10T18:18:59
-ghost/master/yaya.txt1e53b1965c2875426204a1abeb6db479size=889date=2023-05-16T20:23:21
+ghost/master/yaya.txtcaa820e11e9d2779046d39526813543bsize=866date=2023-05-18T22:42:47
 ghost/master/yaya_base/_loading_order.txt9c350c2c9c08f635bff5eaae149af8c8size=103date=2023-04-02T09:34:13
 ghost/master/yaya_base/compatible.dic4f8b1e8c8c08dc44e70b1bd4f52a1affsize=4297date=2023-04-02T09:34:13
 ghost/master/yaya_base/config.dic9dae7f666d2a30ddede6093c7d2a5750size=2627date=2023-04-14T15:03:05

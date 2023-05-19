@@ -10,7 +10,6 @@ dicdir, yaya_base
 dic, st_database.dic //holds a lot of info used globally!
 dic, st_aitalk.dic
 dic, st_boot.dic
-dic, st_kero_menu.dic
 dic, st_mouse.dic
 dic, st_meta.dic
 dic, st_other.dic
