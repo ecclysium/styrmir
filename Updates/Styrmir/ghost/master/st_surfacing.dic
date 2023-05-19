@@ -131,6 +131,32 @@ StyrBase{
 		}
 	
 	}
+	//TENDENCIES
+	--
+	if mood != 9 && anger > 7{
+		"\i[1195]"
+	}
+	--
+	if mood != 3 && amusement > 7{
+		"\i[1196]"
+	}
+	--
+	if mood != 6 && discomfort > 7{
+		"\i[1197]"
+	}
+	--
+	//candles
+	if recentdeaths > population{
+		"\i[1404]"
+	}elseif recentdeaths > population/2{
+		"\i[1403]"
+	}elseif recentdeaths > population/3{
+		"\i[1402]"
+	}elseif recentdeaths > population/4{
+		"\i[1401]"
+	}elseif recentdeaths > 2{
+		"\i[1400]"
+	}
 }
 
 
@@ -202,25 +228,37 @@ Island{
 	--
 	//POWER
 	if powersources[0] > 0{
-		"\i[750]"
+		"\i[780]"
 	}
 	--
 	if powersources[1] > 0{
-		"\i[752]"
+		"\i[782]"
 	}
 	--
 	if powersources[2] > 0{
-		"\i[754]"
+		"\i[784]"
 	}
 	--
 	if powersources[4] > 0{
-		"\i[756]"
+		"\i[786]"
 	}
 	--
 	//temple
 	
 	--
 	//festival
+	if currentfestival != "None"{
+		
+		for _i = 0; _i < ARRAYSIZE(Festivals); _i++{
+			_fest = Festivals[_i]
+			if currentfestival == _fest[0]{
+				_surface = 1 + TOINT(_fest[2])
+				"\i[7%_surface%housingstage]"
+			}
+		
+		}
+		
+	}
 	--
 	"%(Cow)" //Cow
 }
@@ -229,7 +267,7 @@ Island{
 //Cow.
 Cow{
 	if cowlocation > -1 && cowlocation <= 5{
-		"\i[120%cowlocation]"
+		"\i[130%cowlocation]" //cow
 	}
 
 }

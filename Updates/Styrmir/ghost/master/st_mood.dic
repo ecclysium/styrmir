@@ -69,6 +69,17 @@ OnUpdateMood{
 	}
 	
 	
+	
+	
+	//Trump card: Sadness when about to die
+	if population == 1{
+		mood = 6
+		reason = "deaths"
+	}
+}
+
+
+OnMoodDecay{
 	//Decrement counters
 	if anger > 0{
 		anger--
@@ -85,12 +96,7 @@ OnUpdateMood{
 	if discomfort > 0{
 		discomfort--
 	}
-	
-	//Trump card: Sadness when about to die
-	if population == 1{
-		mood = 6
-		reason = "deaths"
-	}
+
 }
 
 
@@ -99,6 +105,7 @@ MoodForce{
 	reason = _argv[1]
 	weather = -1
 	weathertimer = -1
+	//OnEndFestival
 }
 
 

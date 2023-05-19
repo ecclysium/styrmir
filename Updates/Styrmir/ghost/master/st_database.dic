@@ -6,18 +6,18 @@
 
 
 Festivals: array{
-	"Song For Styrmir,1"
-	"Praise of Identity,population>25"
-	"Wind Festival,mood<3"
-	"Beginning of Life,population>50"
-	"Praise the Sun,mood>2&&mood<6"	
-	"Sprite Secrets,farms>2"
-	"Rain Dance,mood>5&&mood<9"
-	"Harvest Festival,farms>3"
-	"Song of the Snow,mood>5&&mood<9"
-	"In Honor Of Family,population>100"
-	"Power of the Storm,mood>=9"
-	"Death's Sting,population>200"
+	"Song For Styrmir,1,0"
+	"Praise of Identity,population>25,1"
+	"Wind Festival,mood<3,2"
+	"Beginning of Life,population>50,2"
+	"Praise the Sun,mood>2&&mood<6,3"	
+	"Sprite Secrets,farms>2,3"
+	"Rain Dance,mood>5&&mood<9,4"
+	"Harvest Festival,farms>3,3"
+	"Song of the Snow,mood>5&&mood<9,2"
+	"In Honor Of Family,population>100,2"
+	"Power of the Storm,mood>=9,4"
+	"Death's Sting,population>100&&deaths>25,4"
 
 }
 
@@ -28,7 +28,7 @@ Orders: array{
 	"Vegetarian,100"										//1
 	"Markets,100"											//2
 	"Water Purifier,250"									//3
-	"Appointed Priest,500" //unlock temple?					//4
+	"Appointed Priest,300" //unlock temple?					//4 - for now just gives tips
 	"Longer Weather,100"									//5
 	"Schools,175"											//6
 	"Ranching,200" //Unlock ranching						//7

@@ -2,12 +2,11 @@ Charset,UTF-8
 __system_settings_version__,2
 balloon,C:\Users\ihave\Desktop\Ukagaka\AlphaVerTest\balloon\weathercloud\
 GroupFlagOverride,noauto,
-scriptbox.left,3283
+scriptbox.left,3421
 shiori.debugnotify,0
-SurfaceTest.visible,1
 Char.VirtualDesktop,97d18c1e-9248-46d6-ae10-bddaf4fadc93
-Char0.center,3386
-scriptbox.top,185
+Char0.center,3336
+scriptbox.top,333
 shell,shell\master\
 FirstBoot,booted
 Char1.center,1309

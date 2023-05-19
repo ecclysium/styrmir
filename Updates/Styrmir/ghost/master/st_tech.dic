@@ -6,9 +6,7 @@ OnTechTree{
 	--
 	"\![*]\q[Investigate Farms,OnEditFarms]\n"
 	--
-	"\![*]\q[Investigate Animal Pens,OnEditRanch]\n"
-	--
-	//"\![*]\q[Investigate Power,OnEditPower]\n"
+	if ranchingallowed == 1; "\![*]\q[Investigate Animal Pens,OnEditRanch]\n"
 	--
 	"\![*]\q[Investigate Entertainment,OnEditFun]\n"
 	--
@@ -23,41 +21,13 @@ OnTechTree{
 	"\![*]\q[Buy Storage,OnUpgradeMenu]\n"
 	--
 	if electricityallowed == 1; "\![*]\q[Buy Buildings,OnBuyBuildings]\n"
-	--
-	"\n[half]"
-	--
-	"\![*]\q[Ask What's Wrong,OnRandomVillager]\n\n"
+
 	--
 	"%(br)\![*]\q[Back,OnSakuraMenu]  \![*]\q[Nevermind,blank]"
 
 }
 
 
-OnRandomVillager{
-	if food < population * 2{
-		"%(Villager)I'm kinda worried about our food sources..."
-	}
-	if population <= 5{
-		"%(Villager)Will I be the next to die?"
-	}
-	if happiness < 20{
-		"%(Villager)We could use some fun.\![raise,OnSetVillagerWant,11]"
-	}else{
-		"%(Villager)Well, I don't see anything too bad."
-	}
-	
-	if watercontent < farms * 10{
-		"%(Villager)Our crops are getting dry! We need help watering them!\![raise,OnSetVillagerWant,3]"
-	}
-}
-
-Villager{
-	"\1%(BB)%(fullName) says: "
-}
-
-OnSetVillagerWant{
-	villagerwant = reference0
-}
 
 farmMenuOpeners{
 	"Ooh, new farms? New crops?"
@@ -471,19 +441,21 @@ OnUpgradeMenu{
 		"Upgrade Food Capacity (%((foodcapsbought+1) * 40) Dew)\n"
 	}
 	--
-	if dewdrops >= (batteriesbought+1) * 60 {
-		"\![*]\q[Upgrade Power Capacity,OnUpgradePower](%((batteriesbought+1) * 60) Dew)\n"
-	}else{
-		"Upgrade Power Capacity (%((batteriesbought+1) * 60) Dew)\n"
+	if electricityallowed == 1{
+		if dewdrops >= (batteriesbought+1) * 60 {
+			"\![*]\q[Upgrade Power Capacity,OnUpgradePower](%((batteriesbought+1) * 60) Dew)\n"
+		}else{
+			"Upgrade Power Capacity (%((batteriesbought+1) * 60) Dew)\n"
+		}
 	}
 	--
-	if dewdrops >= (housingbought+1) * 30 {
+	if dewdrops >= (housingbought+1) * 20 {
 		"\![*]\q[Upgrade Housing,OnUpgradeHousing] (%((housingbought+1) * 20) Dew)\n"
 	}else{
 		"Upgrade Housing (%((housingbought+1) * 20) Dew)\n"
 	}
 	--
-	"Coming Soon: Upgrade Temple %(br)"
+	"Coming Soon: Upgrade Temple \n"
 	--
 	"%(br)\![*]\q[Back,OnTechTree]  \![*]\q[Nevermind,blank]"
 	//"Styrmir's Weather Endurance: current is %styweatherendure"
@@ -517,7 +489,7 @@ OnUpgradePower{
 }
 
 OnUpgradeHousing{
-	dewdrops -= (housingbought+1) * 30
+	dewdrops -= (housingbought+1) * 20
 	housingbought++
 	housingavailable += housingbought * 3
 	
@@ -559,7 +531,7 @@ OutputFestivalsUnlock : all{
 		if _unlocked == 1{
 			"Already Bought"
 		}else{
-			"\![*]\q[Buy (%(1+_i * 12) Dew),OnUnlockFestival,%_i]"
+			"\![*]\q[Buy (%((1+_i) * 20) Dew),OnUnlockFestival,%_i]"
 		}
 		"\n"
 	}
@@ -569,7 +541,7 @@ OutputFestivalsUnlock : all{
 OnUnlockFestival{
 	
 	_index = TOINT(reference0)
-	_cost = 1+_index * 12
+	_cost = (1+_index) * 20
 	
 	if dewdrops >= _cost{
 		//If the villagers were complaining for fun
@@ -590,45 +562,6 @@ OnUnlockFestival{
 	}
 	--
 	"%(br)\![*]\q[Back,OnUnlockFestivalMenu]  \![*]\q[Nevermind,blank]"
-	
-}
-
-
-
-OnCheckForFestival{
-	//go through each festival and see if any can be activated, then pick one at random and reset the timer
-	for _i = 0; _i < ARRAYSIZE(Festivals); _i++{
-		_thisfestival = Festivals[_i]
-		_unlocked = unlockedfestivals[_i]
-		_reqs = _thisfestival[1,","]
-		if EVAL(_reqs){
-			if _unlocked == 1{
-				"\![raise,OnActivateFestival,%_i]"
-			}else{
-				""
-			}
-		}
-		
-	}
-
-}
-
-OnActivateFestival{
-	_index = TOINT(reference0)
-	
-	if happiness < getHappyCap / 4{ //festivals are more often if they're unhappy
-		festivaltimer = 20 + RAND(10)
-	}elseif happiness < getHappyCap / 3{ 
-		festivaltimer = 20 + RAND(30)
-	}elseif happiness < getHappyCap / 2{ 
-		festivaltimer = 20 + RAND(60)
-	}else{
-		festivaltimer = 20 + RAND(100)
-	}
-	
-	timeuntilfestivalend = 10
-	currentfestival = (Festivals[_i])[0]
-	
 	
 }
 

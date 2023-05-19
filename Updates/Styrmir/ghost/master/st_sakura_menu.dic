@@ -6,23 +6,40 @@ SakuraMenuGreetings : nonoverlap
 		when 3{ //happy
 			"Oh! It's GREAT to see you!"
 			"Heehee! Hey!"
+			"%(StyrmirLook)Oh! \w5Oh! \w8Do you have something to tell me?"
+			"%(Styrmir)Let's give the humans something fun! \w8%(StyrmirLook)What do you think?"
+			"Human!!"
+			"Hee hee~♪"
+			"Hi! ♪♪♪"
 		}
 		when 6{ //sad
 			"%(Styrmir)Hic.\w4.\w4. what is it, \w6human?"
-		
+			"%(StyrmirLook)Yes? \w8Did you get an idea for the island? \w8Sorry.\w4.\w4.\w4 %(Styrmir)maybe I'm relying on you too much.\w4.\w4."
+			"%(StyrmirLook)What do you want me to do.\w4.\w4.? \w8%(Styrmir)I'll probably mess it up, \w6but I can try.\w4.\w4.\w4"
+			"Y-yeah?"
+			".\w2.\w2.Huh? \w6Sorry."
 		}
 		when 9{	//angry
 			"I'm angry!"
+			"Make it quick."
+			"Hurry."
+			"I'm busy, human."
+			"What is it this time?"
+			"%(StyrmirLook)Whatever it is, \w6it better be important!"
+			"%(StyrmirLook)What do you want? \w8%(Frown)Make it quick!"
+		
 		
 		}
 		others{ //neutral
-			//""
+			"%(StyrmirLook)Do you require something from me?"
+			"%(StyrmirLook)Oh? \w8Did you get an idea to improve the island?"
 			"Hello."
 			"How can I help you?"
 			"Hello, human."
 			"Do you have advice?"
 			"Oh! Hello, human."
 			"Human, it's good to see you!"
+			"Did you think of something?"
 		}
 	
 	}
@@ -44,17 +61,18 @@ OnSakuraMenu : all
 	"\![*]\q[Chat with Styrmir,OnInteractMenu]%(br)"
 	"\![*]\q[Ask For Weather,OnWeatherAsk]\n"
 	"\![*]\q[Help the village,OnTechTree]\n"
+	"\![*]\q[Talk To Villagers,OnRandomVillager]\n"
 	//"\![*]\q[Settings,OnSettings]%(br)"
 	"%(br)"
 	"\![*]\q[Nevermind,blank]"	
-	--
+
 	if cowlocation == 7{
 		"           \_b[img\COW.png,inline]"
 	}
 	
 	"\n\f[align,center]\f[height,-1]%(br)\__q[OnSettings]\_b[img\GEAR.png,inline]\__q ------------------------------ \__q[OnStats]\_b[img\STATS.png,inline]\__q\n"
 	
-	"%(version), %(getTime)\nDew Drops: %dewdrops ~~~ Festival: %currentfestival"
+	"%(version), %(getTime)\nDew Drops: %(TOINT(dewdrops)) ~~~ Festival: %currentfestival"
 
 }
 
@@ -121,7 +139,7 @@ OnAskReset{
 OnStats{
 	"\_q"
 	--
-	"Total Villager Deaths: %deaths\nTotal Food Produced: %totalfoodproduced%(br)Pets: %pets\nPunches: %punches\nTickles: %tickles\nMinutes Alive: %timealive"
+	"Total Villager Deaths: %deaths\nTotal Food Produced: %(TOINT(totalfoodproduced))%(br)Pets: %pets\nPunches: %punches\nTickles: %tickles\nMinutes Alive: %timealive"
 	--
 	if cowlocation == 9{
 		"\n\_b[img\COW.png,inline]"
@@ -176,24 +194,89 @@ OnTellSadStory{
 	if discomfort > 10{
 		MoodForce(6,"story")
 	}
-	"%(Styrmir)That's so sad! \w8I can't believe the woodsman would do that.\w4.\w4."
+	
+	case mood{
+		when 3{ //happy
+			"Oh.\w3.\w3 %(StyrmirLook)%(Frown)Why’d you have to go ahead and tell me that.\w4.\w4. %(Styrmir)%(Frown)I feel my mood coming down.\w4.\w4."
+			"And I was so happy! \w8%(Styrmir)I’m starting to feel sad now.\w3.\w3. \w8Almost like I could cry!"
+		}
+		when 6{ //sad
+			"(sniffle) \w8%(StyrmirLook)How terrible.\w3.\w3. \w8%(Styrmir)Now I’m even sadder.\w4.\w4."
+			"%(StyrmirLook)%(Frown)I can’t believe that’s how it would end.\w4.\w4. What a depressing story.\w4.\w4."
+		}
+		when 9{	//angry
+			".\w3.\w3.%(Styrmir)How sad, \w7I think I’m starting to mellow out.\w4.\w4."
+			"%(StyrmirLook)What a terrible story! \w8Who could do such a thing to someone?! \w8Seriously.\w4.\w4. \w8%(Frown)You’re gonna make me cry!"
+		}
+		others{ //neutral
+			"%(StyrmirLook)%(Frown)I can’t believe no one would buy her matchsticks.\w3.\w3. \w8What a terribly sad story!"
+			"Oh no.\w3.\w3. %(StyrmirLook)But everything was ok in the end.\w3.\w3. Right? \w8%(Frown)Right?"
+			"%(Styrmir)That's so sad! \w8%(Frown)I can't believe the woodsman would do that.\w4.\w4."
+		}
+	
+	}
 
 }
 
 OnTellJoke{
-	amusement +=2
+	amusement += 2
 	if amusement > 10{
 		MoodForce(3,"joke")
 	}
 	
-	"%(Styrmir)Oh, \w6that's a good one, \w6human!"
+	
+	case mood{
+		when 3{ //happy
+			"%(StyrmirLook)Hahaha! \w8Oh, \w6I get it! \w8’Beats me’ is like the saying! \w8Oh you humans and your humor!"
+			"%(StyrmirLook)Hahahaha! \w8You should be a stand up comedian! \w8I haven’t laughed this hard in a long time!"
+		}
+		when 6{ //sad
+			"%(StyrmirLook).\w3.\w3.Oh.\w3.\w3. \w8%(Styrmir)Uhm.\w3.\w3. \w8I don’t get it.\w3.\w3. Oh! \w8%(Smile)Hahah! \w8%(StyrmirLook)%(Smile)I get it now.\w3.\w3. \w8horses have long faces, \w6don’t they? \w8Hahaha!"
+			".\w3.\w3.Hmm? \w8What’s the joke? \w8Hahaha! \w8“Waist” as in waste.\w3.\w3. \w8Hahaha!"
+		
+		}
+		when 9{	//angry
+			"Pfft- Hahaha! \w8%(StyrmirLook)What?! \w8No, I did not think that was funny! \w8Not at all! \w8%(Smile)Hehehe.\w3.\w3."
+			".\w3.\w3.Pfft- %(StyrmirLook)Hahahaha! \w8I suppose someone might confuse those two words.\w3.\w3. \w8Maybe I’m starting to feel better.\w3.\w3."
+		
+		}
+		others{ //neutral
+			"%(StyrmirLook)Oh, \w4I get it! \w8The fish said ''dam''! \w8Because it ran into a dam! \w8Human, \w6tell me more jokes!"
+			"%(StyrmirLook)Haha, \w6I had no clue humans were so funny! \w8What with your “knock knock” jokes and all! "
+			"%(StyrmirLook)‘Knock knock’? \w8Isn’t there supposed to be more.\w3.\w3. \w8OH! \w8Because it was ‘deja who’— \w6I get it! \w8Hahahaha!"
+			"%(Styrmir)Oh, \w6that's a good one, \w6human!"
+		}
+	
+	}
 
 }
 
 OnCompliment{
 	amusement++
 	dewdrops++
-	"%(Styrmir)Aw, \w6you're making me blush."
+	
+	case mood{
+		when 3{ //happy
+			"%(StyrmirLook)Really?\w8 You’re gonna make me blush, \w6human! "
+			"%(Styrmir)Aw, \w6you're making me blush."
+			"%(StyrmirLook)Oh me, oh my! \w8Do you really think so?\w8 %(Smile)Well aren’t you the sweetest!"
+		}
+		when 6{ //sad
+			"Oh.\w3.\w3 Thank you.\w3.\w3 I picked it out myself.\w3.\w3 I’m starting to feel a little better."
+			"%(StyrmirLook)O-Oh.\w3.\w3. \w6%(Smile)hehe, you’re too kind.\w3.\w3. \w8It’s making me feel all fuzzy inside.\w3.\w3."
+		}
+		when 9{	//angry
+			"%(StyrmirLook)Hmph!\w8 Well.\w3.\w3. \w8I suppose I should thank you.\w8 That was nice.\w3.\w3."
+			"%(Styrmir)I guess that was a nice thought.\w3.\w3. \w8%(StyrmirLook)But don’t think this means I forgive you or anything!"
+		}
+		others{ //neutral
+			"%(StyrmirLook)Oh!\w8 Thank you!\w8 Do you really think so?\w8 I cut it myself!"
+			"%(Styrmir)Aw, \w6you're making me blush."
+			"Hehe~\w8%(StyrmirLook)%(Smile)Oh you are such a flatterer! "
+			
+		}
+	
+	}
 
 }
 
@@ -262,9 +345,24 @@ OnGiveSun{
 	if reference0 == 1{
 		weather = 0
 		weathertimer = styweatherendure
-		"%(Styrmir)And sunshine will cover the lands!"
+		"%(StyrmirLook)Sunshine, \w4sunshine, \w4come my way! \w8%(Smile)Tomorrow there will be sunshine again!~♪"
 	}else{
-		"I can only do sun when I'm feeling ok."
+	
+		case mood{
+			
+			when 6{ //sad
+				"%(StyrmirLook)Even if I tried making sunshine right now, \w6the rain clouds would just cover it up.\w3.\w3.\w8 %(Styrmir)If I cheer up I might be able to do it though.\w3.\w3."
+			
+			}
+			when 9{	//angry
+				"%(StyrmirLook)%(Frown)Are you serious? \w8Do I look like I’m in the mood to make sappy sunshine right now?!\w8 I’m way too angry! \w8Maybe if you tried making me happy I could, \w6but right now you can just forget it!"
+			
+			}
+			others{ //neutral
+				"%(StyrmirLook)%(Surprised)Sunshine! \w8Oh how I wish I could but I’m afraid I’d have to be in an even better mood to make sunshine. \w8%(StyrmirLook)Try making me happy!"
+			}
+		
+		}
 	}
 	if villagerwant == 0{
 		villagerwant = -1
@@ -272,15 +370,36 @@ OnGiveSun{
 	}
 }
 
-//1
+//1 -- CLOUDS AND WIND UNTANGLE LATER
 OnGiveCloud{
 	if reference0 == 1{
 		
 		weather = 1
 		weathertimer = styweatherendure
+		"Oh! \w8Sure! \w8%(Styrmir)Let’s get our little friends some shade! \w8I’m sure the farmers who are hard at work would appreciate it."
 		"Aw, I don't want them to be hurt by how bright I am. \w8%(Styrmir)Here you go!"
+		"A little bit of wind, eh? \w8Sure thing! \w8I hope no one flies away in the gust! \w8%(Styrmir)Stay safe little guys!"
 	}else{
-		"%(Styrmir)Augh, my clouds keep evaporating! \w8I'm too bright!"
+		case mood{
+			when 3{ //happy
+				"%(StyrmirLook)If I try making clouds right now they’ll just evaporate! \w8Maybe if I was a little calmer? \w8%(Styrmir)Try making me feel just fine."
+				"%(Styrmir)Augh, my clouds keep evaporating! \w8I'm too bright!"
+				"Aw man! \w8%(StyrmirLook)I would love to but I’m too excited to make any wind right now! \w8%(Frown)Hmm.\w3.\w3. \w8Maybe If I was in a more neutral state?"
+			}
+			when 6{ //sad
+				"Cloudy? \w8%(StyrmirLook)I can make clouds but they’re all rainclouds.\w3.\w3. \w8%(Styrmir)Sorry, \w6maybe if I calmed down a little bit.\w3.\w3.? "
+				"Oh. \w8Uhm.\w3.\w3. \w8%(StyrmirLook)Sorry,\w6 I don't think I can do that right now.\w3.\w3. \w8Maybe you can try calming me down? \w8%(Styrmir)If you want to.\w3.\w3."
+			}
+			when 9{	//angry
+				"%(StyrmirLook)You seriously expect someone who’s ‘storming mad’ to make ‘just’ cloudy weather? \w8In your dreams! \w8Maybe if you can calm me down."
+				"Wind?! \w8%(StyrmirLook)Just because I can make storms doesn’t mean I can just make wind out of nowhere! \w8%(Frown)I’m so mad right now, \w6I really need to calm down!"
+			}
+			others{ //neutral
+				"Huh? %(StyrmirLook)Sure." //should never run but eh
+			}
+		
+		}
+		
 	}
 	if villagerwant == 1{
 		villagerwant = -1
@@ -294,8 +413,25 @@ OnGiveRain{
 		weather = 3
 		weathertimer = styweatherendure
 		"They.\w4.\w4. need even more water? %(Styrmir)Here.\w4.\w4. glad it helps.\w4.\w4."
+		"Rain.\w3.\w3.? \w8%(StyrmirLook)Sure, I can do that. \w8%(Styrmir)At least I’ll be useful.\w3.\w3."
 	}else{
-		"I'm too happy for rain! \w8It just evaporates!"
+		
+		case mood{
+			when 3{ //happy
+				"%(StyrmirLook)Rain?! \w8I’m way too happy to do anything like that right now! \w8%(Styrmir)Try again when I’m down in the dumps."
+				"I'm too happy for rain! \w8It just evaporates!"
+				
+			}
+			
+			when 9{	//angry
+				"You’re seriously asking me for rain right now?! \w8I’m too outraged.\w3.\w3. \w8Try again when I’m all mopey and sobbing!"
+			
+			}
+			others{ //neutral
+				"%(StyrmirLook)Oh, \w6rain? \w8Hmm.\w3.\w3. \w8That might be tough. \w8Maybe If I was a little sad.\w3.\w3. \w8%(Frown)I always get teary eyed when I hear a sad story."
+			}
+		
+		}
 	}
 	if villagerwant == 3{
 		villagerwant = -1
@@ -306,11 +442,27 @@ OnGiveRain{
 //5
 OnGiveThunder{
 	if reference0 == 1{
-		"Oh! %(Styrmir)May my clouds and anger rumble through them.\w4.\w4."
 		weather = 5
 		weathertimer = styweatherendure
+		"Ah, a reasonable request! \w8%(StyrmirLook)Yes, \w6I’ll brew a storm right away! \w8%(Smile)Cover your ears, \w6because I’m about to blow!"
+		
 	}else{
 		"I have to be angry to manage any thunder, human. "
+		case mood{
+			when 3{ //happy
+				"%(StyrmirLook)I’m in such a good mood right now, \w6there's no way I could do something like a storm! \w8Oh, \w6Oh! \w8Try making me angry!"
+				
+			}
+			when 6{ //sad
+				"Oh.\w3.\w3. \w8%(StyrmirLook)I don’t really have the energy to make storms. \w8Maybe you could try punching me? \w8%(Styrmir)O-Or on second thought, \w6maybe don’t.\w3.\w3."
+			
+			}
+			
+			others{ //neutral
+				"%(StyrmirLook)A storm? Hmm.\w3.\w3. I’m a little too calm to do something like that! Maybe if you rile me up a bit? \w8Try making me angry."
+			}
+		
+		}
 	}
 	if villagerwant == 5{
 		villagerwant = -1
@@ -323,9 +475,23 @@ OnGiveSnow{
 	if reference0 == 1{
 		weather = 7
 		weathertimer = styweatherendure
-		"Sure! %(Styrmir)Let me bring in a snowstorm!"
+		"I can make snow.\w8 It’s just really cold rain anyways.\w3.\w3. \w8%(Styrmir)I wonder if I’ll get to see any snowmen.\w3.\w3."
 	}else{
-		"I'm sorry, I can only cause snow when I'm sad."
+		"%(StyrmirLook)I can only cause snow when I'm sad."
+		case mood{
+			when 3{ //happy
+				"%(StyrmirLook)%(Frown)Snow? \w8If I try making any snow right now it just melts! \w8%(Styrmir)%(Frown)Maybe If I was a little more glum?"
+				
+			}
+			when 9{	//angry
+				"Snow? \w8Just because I’m storming mad doesn’t mean I can just make blizzards on a whim! \w8Maybe If I calmed down a little I could do it.\w3.\w3."
+			
+			}
+			others{ //neutral
+				"%(Styrmir)Snow.\w3.\w3. \w8I’d have to be pretty sad to make it snow! \w%(StyrmirLook)8Maybe you can try telling me a sad story?"
+			}
+		
+		}
 	}
 	if villagerwant == 7{
 		villagerwant = -1

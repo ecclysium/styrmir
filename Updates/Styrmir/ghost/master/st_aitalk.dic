@@ -14,11 +14,326 @@ OnAiTalk
 RandomTalk : nonoverlap_pool
 {
 	"%(Styrmir)"
+	--
+	case mood{
+		when 3{ //happy
+			"%(StyrmirLook)Look \w2look \w2look! \w8\w4%(Styrmir)%(Point)One of the humans is basking in the sunlight!"
+			"April showers bring May flowers~♪"
+			if population > 20; "%(Styrmir)Ah! \w8Look Look! \w8%(Smile)One of the humans is proposing! \w8%(StyrmirLook)Aren't they just the cutest?"
+			"Hmm~ \w6Hmm~ \w8Aren't my little humans so darling~?"
+			"%(StyrmirLook)The other day I received a night time prayer from one of the children on the island. \w8She was asking me to convince her parents to let her get a puppy.\w3.\w3. %(Smile)Hahaha!~"
+		}
+		when 6{ //sad
+			"%(StyrmirLook)Oh.\w3.\w3. \w6%(Styrmir)Look.\w3.\w3. %(Point)This one is wearing little yellow boots, \w6and a little yellow coat.\w4.\w4."
+			"Oh.\w3.\w3. \w8You poor little things.\w3.\w3. Maybe If I took better care of you all.\w4.\w4."
+			"Maybe I'm not cut out for this after all.\w4.\w4."
+		}
+		when 9{	//angry
+			"%(Styrmir)Hmph. \w8They’re all just sitting inside. \w8Why doesn’t anyone want to play in the thunderstorm?"
+			"%(Styrmir)Silly humans."
+			"%(Styrmir)%(Point)Try some of this!"
+			"%(StyrmirLook)Human? \w8%(Point)This little one of your kind is looking pathetic. \w8%(Styrmir)Look at it."
+			if happiness < 30; "%(Styrmir)%(Surprised)Why are they not happy? \w8Am I not the definition of captivating?"
+		}
+		others{ //neutral
+			
+			"%(StyrmirLook)Human.\w4.\w4.? \w8Look! \w8%(StyrmirPoint)This one almost looks a little bit like you!"
+			"I often find myself getting curious about humans and their cultures and customs.\w4.\w4. \w8%(StyrmirLook)Maybe you could teach me sometime?"
+			"%(Surprised)Oh! \w8That human is having %(Food)! \w8I've always wondered how it tastes.\w3.\w3. %(Smile)Looks like they're enjoying themselves!"
+			"Humans are so quaint.\w3.\w3. Planting seeds, \w6watering them and watching them slowly grow.\w3.\w3. Though I suppose they have no other option!"
+			"Oh! Hello, human."
+			"Human, it's good to see you!"
+		}
 	
-	if mood == 6 && reason == "deaths"{
-		"Human! \w8Human, the little other ones of you keep dying! \w8Help!"
+	}
+	if recentdeaths > population{
+		"%(Frown)Human! \w8%(StyrmirLook)%(Frown)Human, the little other ones of you keep dying! \w8Help!"
+	}
+	
+	if currentpriestname != "" && tipsntricks == 1{
+		"%currentpriestname says:\n"
+		--
+		if population == 1{
+			".\w4.\w4.I'm the only one left. \w8Please, \w6talk to Styrmir, \w6and ask them to reset this world.\w4.\w4."
+		}
+		".\w4.\w4.Is it fun, \w6being Styrmir's aide?"
+		"If villagers aren't happy, \w6they'll work more slowly. \w8That means less food production."
+		"Our lifespans can be different from other humans. \w8We may be able to repopulate fast, \w6but with much death, \w6comes much pain and sadness.\w4.\w4."
+		"Festivals can gain Dew Drops when they're completed. \w8But if you have many festivals unlocked and too few villagers to manage the different kinds, \w8less festivals will occur."
+		"Each field consumes the same amount of water, \w6regardless of what it is growing. \w8Be careful."
+		"I could really go for some cheese right now."
+		"I want to pet a cow."
+		if animals[0] > 2{
+			"Cows must be the greatest creation of all."
+			"I am so grateful for cows."
+			"Thank Styrmir for cows."
+		}
+		"Styrmir's mood always affects our weather, \w6but they can concentrate weather over the island to have a greater impact. \w8Without Styrmir's help, \w6it's nearly impossible to keep the fields watered."
+		"You can keep sheep, \w6but I don't think they do much. \w8Cute, though. \w8You probably can't see them from where you are."
+		"Festivals are important for us villagers to stay happy."
+		".\w4.\w4.I envy you in a way. \w8Way up in the sky, \w6directly cared for. \w8Maybe in my next incarnation I'll get to be a god's aide."
+		"I should write another song for Styrmir."
+		if recentdeaths > 5; "It's time to light more candles for those who have passed.\w4.\w4."
+		if population > 50; "How many people! \w8I'm grateful to know so many other good humans on this island."
+		"If a villager says they want certain weather, \w6perhaps you can gain favorable Dew with Styrmir for helping them fulfill it.\w4.\w4."
+	}
+	
+	//Villager chat
+	{
+		if recentdeaths > 10{
+			"%(Villager)I can't help but think of poor %(deadVillagerName).\w4.\w4."
+			
+		}
+		if food < population{
+			"%(Villager)There's barely any food left."
+			"%(Villager)My stomach is growling."
+			"%(Villager)Please, \w6oh great Styrmir, \w6our fields.\w3.\w3."
+			"%(Villager)I wish I could just try some %(Food).\w4.\w4."
+			"%(Villager)Just a tiny thing.\w4.\w4. maybe some %(berryfood).\w4.\w4."
+			"%(Villager)I'm so hungry. \w8I hope there will be food left for me after work.\w4.\w4."
+		}else{ //If you're OK on food, they might want random weather!
+			"%(Villager)"
+			--
+			"I wanna build a snowman!\![raise,OnSetVillagerWant,7]"
+			"It would be fun to splash in some puddles.\w3.\w3.\![raise,OnSetVillagerWant,3]"
+			"It's always so dreary. \w8Why can't we just get some sun?\![raise,OnSetVillagerWant,0]"
+			"There's something captivating about storms.\w4.\w4.\![raise,OnSetVillagerWant,5]"
+			"Rain, \w6rain, \w6go away, \w6come again another day.\w3.\w3.\![raise,OnSetVillagerWant,0]"
+			"I'm so hot, \w6could we just get a few clouds?\![raise,OnSetVillagerWant,1]"
+		}
+		
+		if watercontent < 100{
+			"%(Villager)We need more water."
+			"%(Villager)Styrmir! \w8Oh, \w6Styrmir! \w8We need water!"
+		}
+	
+	
+	
 	}
 }
+
+
+
+
+Villager{
+	"\1%(SB)%(fullName) says: "
+}
+
+OnSetVillagerWant{
+	villagerwant = reference0
+}
+
+
+
+
+
+
+OnRandomVillager{
+	if food < population * 2{
+		"%(Villager)I'm kinda worried about our food sources..."
+	}
+	if population <= 5{
+		"%(Villager)Will I be the next to die?"
+	}
+	if happiness < 20{
+		"%(Villager)We could use some fun.\![raise,OnSetVillagerWant,11]"
+	}else{
+		"%(Villager)Well, I don't see anything too bad."
+	}
+	
+	if watercontent < farms * 10{
+		"%(Villager)Our crops are getting dry! We need help watering them!\![raise,OnSetVillagerWant,3]"
+	}
+}
+
+
+//argv0 is index
+startFestivalTalk{
+	case _argv[0]{
+		when 0{ //Song for Styrmir
+			case mood{
+				when 3{ //happy
+					"%(Styrmir)Oh, human, looklooklook! \w8%(StyrmirLook)%(Point)It's a festival about me, \w6and they're all just getting together to sing and praise me! \w8I'm so happy, \w6thank you!"
+					
+				}
+				when 6{ //sad
+					"%(Styrmir)They're.\w3.\w3. singing my praises? \w8%(StyrmirLook)Are they trying to cheer me up? \w8How sweet, \w4and how captivating these beings can be.\w3.\w3. \w6it's working."
+				
+				}
+				when 9{	//angry
+					"%(Styrmir)A festival? \w8Celebrating me? \w8Hmph. \w8I'll take it. \w8%(StyrmirLook)I deserve some praise for all I do, \w6and they should have done this sooner."
+				}
+				others{ //neutral
+					"%(StyrmirLook)Human, \w6look, \w6they're praising me! \w8%(Smile)It's a whole festival just about ME!"
+				
+				}
+		
+			}
+		}
+		when 1{ //Praise of Identity
+			case mood{
+				when 3{ //happy
+					"%(Styrmir)Look! \w6Look! \w8%(Point)They’re hosting a parade in honor of everyone’s personal identities! \w8\w4It’s so colorful and pretty!"
+					
+				}
+				when 6{ //sad
+					"%(Styrmir)Oh.\w3.\w3. Wow.\w3.\w3. So pretty. \w8Look at all the flags and banners.\w3.\w3. %(StyrmirLook)I wonder if there’s anyone down there who’s like me? "
+				
+				}
+				when 9{	//angry
+					"%(Styrmir)%(Smile)I suppose it’s good to have pride in yourself.\w3.\w3. \w6%(StyrmirLook)But they better not be blaring music all night! \w8%(Point)Or else!"
+				}
+				others{ //neutral
+					"%(StyrmirLook)Everyone is getting ready to celebrate their personal identities! \w8%(Smile)Look! \w8%(Point)They’re carrying flags and banners! \w8I wonder if they would make me one?"
+				
+				}
+		
+			}
+		}
+		when 2{ //Wind Festival
+			"Oh wow! They’re celebrating.\w3.\w3. me? %(StyrmirLook)Isn’t that just the cutest! %(Styrmir)%(Smile)A festival appreciating the winds!"
+		}
+		when 0{ //Beginning of Life
+			case mood{
+				when 3{ //happy
+					"%(StyrmirLook)Awww! \w8It's a big festival for all the little babies! \w8%(Smile)They all are so happy."
+					
+				}
+				when 6{ //sad
+					"%(StyrmirLook)Oh, \w6at least they get to be happy.\w4.\w4. \w6together as a community, \w6%(Smile)how sweet.\w4.\w4."
+				
+				}
+				when 9{	//angry
+					"%(StyrmirLook)Ugh, \w4babies are gross. \w8Life is precious, \w6but you humans can be so disgusting sometimes.\w8 %(Styrmir)At least the villagers are happy about it, \w6somehow."
+				}
+				others{ //neutral
+					"%(StyrmirLook)It looks like they're celebrating all the births recently, \w6how cute.\w4.\w4. "
+				
+				}
+		
+			}
+		}
+		when 0{ //Praise The Sun
+			"How lovely! \w8%(StyrmirLook)The humans are all celebrating the sunshine I make for them! "
+		}
+		when 0{ //Sprite Secrets
+			case mood{
+				when 3{ //happy
+					"Look! \w8They’re celebrating something called the “Sprite Secrets” festival today! \w8%(StyrmirLook)I would love to dress up myself but I don’t think they make costumes my size.\w3.\w3. \w8Oh well. \w8%(Styrmir)At least I can watch from afar!"
+					
+				}
+				when 6{ //sad
+					"Look.\w3.\w3. \w8%(StyrmirLook)They’re celebrating something called the “Sprite Secrets” festival today.\w3.\w3. \w8%(Styrmir)It looks like fun, running around in costumes and all.\w3.\w3."
+				
+				}
+				when 9{	//angry
+					"Look! \w8%(StyrmirLook)They’re celebrating something called the “Sprite Secrets” festival today! \w8%(Styrmir)Hmph! \w8They better have eaten those pumpkin innards! \w8I don’t want them wasting food for silly decorations.\w3.\w3"
+				}
+				others{ //neutral
+					"Look! \w8%(Point)They’re celebrating something called the “Sprite Secrets” festival today! \w%(StyrmirLook)8The humans are all dressing up in costumes and playing pranks on one another!"
+				
+				}
+		
+			}
+		}
+		when 0{ //Rain Dance
+			"Oh.\w3.\w3. \w6They’re celebrating me? \w8I thought everyone hated the rain.\w3.\w3. \w8%(StyrmirLook)%(Smile)Oh wow, \w8I’m being useful! "
+		}
+		when 0{ //Harvest Festival COW COW COW COW COW COW COW COW
+			case mood{
+				when 3{ //happy
+					"%(Styrmir)Look! \w6Look! \w8They’re running a contest for the largest cow! \w8I wonder who’s gonna win? \w8%(Point)%(randVillagerName) or %(randVillagerName)?"
+					
+				}
+				when 6{ //sad
+					"%(StyrmirLook)Oh, \w6they're holding a harvest festival. \w8%(Styrmir)It's so quaint, \w6and so festive.\w4.\w4. why, \w6%(Point)look at the size of that cow."
+				
+				}
+				when 9{	//angry
+					"%(Styrmir)They're celebrating their harvests. \w8At least someone is appreciating all my hard work keeping their crops alive."
+				}
+				others{ //neutral
+					"%(StyrmirLook)Isn’t it nice? \w8The humans are celebrating a bountiful harvest! \w8%(Styrmir)Look! \w8There's even a contest for the largest crop!"
+				
+				}
+		
+			}
+		}
+		when 0{ //Song of the Snow
+			case mood{
+				when 3{ //happy
+					"%(StyrmirLook)%(Frown)Oh no! %(Styrmir)%(Frown)I hope I'm not ruining their snow festival with all my sunshine, \w6but I just can't help it! \w8They're so cute, \w6how could I not be ecstatic!?"
+					
+				}
+				when 6{ //sad
+					"%(Styrmir)Oh, \w6a snow festival.\w6.\w6. I could make them snow right now. \w8Maybe then I'd be doing something right.\w4.\w4."
+				
+				}
+				when 9{	//angry
+					"%(Styrmir)I have storms right now, \w6not snow, \w6silly mortals. \w8%(StyrmirLook)They're trying to celebrate the snow, \w6but I can't whip up a whole blizzard like this. \w8%(Styrmir)Hmph."
+				}
+				others{ //neutral
+					"%(Styrmir)A celebration of cold weather! \w8How wonderful! \w8%(StyrmirLook)Perhaps they think it's pretty?"
+				
+				}
+		
+			}
+		}
+		when 0{ //In Honor Of Family
+			case mood{
+				when 3{ //happy
+					"%(Styrmir)Aah! \w8%(Smile)How cute! \w8It's a festival to celebrate families since they've been here so long. \w8%(StyrmirLook)You're kinda like my family now, \w6too, \w6huh?"
+					
+				}
+				when 6{ //sad
+					"%(StyrmirLook)They're celebrating family now.\w4.\w4. somehow, \w6they're finding reasons to be happy, \w6even when life is like this. \w8%(Styrmir)Humans are so admirable.\w6.\w6."
+				
+				}
+				when 9{	//angry
+					"%(StyrmirLook)They're celebrating family. \w8%(Styrmir)%(Frown)At least they get along with each other. \w8%(StyrmirLook)Unlike some other duo I know."
+				}
+				others{ //neutral
+					"%(StyrmirLook)They've been alive long enough to have families, \w6human! \w8Now they celebrate. \w8%(Smile)Thank you for your wonderful advice so far. "
+				
+				}
+		
+			}
+		}
+		when 0{ //Power of the Storm
+			"%(StyrmirLook)They're celebrating my thunder and lightning storms? \w8Hmph. \w8Well,\w6 I suppose it’s nice to know my hard work is appreciated."
+		}
+		when 0{ //Death's Sting
+			case mood{
+				when 3{ //happy
+					"%(Styrmir)%(Frown)O-\w3Oh.\w4.\w4. they're honoring the dead. \w8The least I can do is be quiet, \w8for now.\w4.\w4."
+					
+				}
+				when 6{ //sad
+					"%(Styrmir)Hic.\w4.\w4. %deaths gone. \w8%(Frown)So many humans dead, \w6and it's all my fault, \w6right? \w8I couldn't save them, \w6so now the village mourns.\w4.\w4."
+				
+				}
+				when 9{	//angry
+					"%(StyrmirLook)They're mourning their dead. \w8%(Frown)This is your fault, \w6you know. \w8You could serve to give better advice. "
+				}
+				others{ //neutral
+					"%(StyrmirLook)%(Frown)They're honoring their dead. \w8I will take a moment of silence, too. \w8%(Styrmir)%(Frown)A whole %deaths gone.\w4.\w4"
+				
+				}
+		
+			}
+		}
+		
+	
+	}
+
+
+
+}
+
+
+
+
+
 
 
 

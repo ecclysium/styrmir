@@ -242,4 +242,157 @@ syllableCV{
 }
 
 
+Food{
+	fishfood
+	berryfood
+	wheatfood
+	applefood
+	ricefood
+	potatofood
+	cornfood
+}
+
+
+fishfood{
+	"sashimi"
+	"grilled bass"
+	"grilled salmon"
+	"sushi"
+	"trout"
+	"fried catfish"
+	"perch"
+	"grilled trout"
+
+}
+
+berryfood{
+	"strawberries"
+	"blueberries"
+	"raspberries"
+	"blackberries"
+	"boysenberries"
+	"marmalade"
+	"strawberry jam"
+	"blackberry jam"
+	"raspberry jam"
+	"dewberries"
+	"dewberry jelly"
+	"cranberry juice"
+	"cranberries"
+	"blackberry juice"
+	"raspberry juice"
+	"raspberry tea"
+	"blackberry tea"
+	"strawberry milk"
+	"blueberry tart"
+	"blackberry tart"
+	"huckleberry"
+	"chokeberry"
+	"currantberry"
+	"mulberry"
+	"mulberry tea"
+	"blackcurrant tea"
+	"huckleberry jam"
+	"blackberry cobbler"
+	"dewberry cobbler"
+	"mixed berry cobbler"
+	"berry tea"
+	"berry juice"
+	"a smoothie"
+
+}
+
+wheatfood{
+	"pancakes"
+	"bread"
+	"cake"
+	"waffles"
+	"biscuits and gravy"
+	"hardtack"
+	"sourdough bread"
+	"pumpernickel bread"
+	"rye bread"
+	"honeywheat bread"
+	"donuts"
+	"bagels"
+	"english muffins"
+	"muffins"
+	"cinnamon muffins"
+	"beer"
+	"cinnamon rolls"
+	"cream cheese danishes"
+	"kolaches"
+	"sandwiches"
+	"pie crust"
+	"sugar cookies"
+
+
+}
+
+
+potatofood{
+	"baked potatoes"
+	"loaded potatoes"
+	"gnocchi"
+	"french fries"
+	"hashbrowns"
+	"garlic potatoes"
+	"mashed potatoes"
+	"purple potatoes"
+	"scalloped potatoes"
+	"potato bread"
+	"potato pancakes"
+	"potato soup"
+}
+
+
+cornfood{
+	"cornbread"
+	"corn on the cob"
+	"creamed corn"
+	"corn casserole"
+	"fritters"
+	"taco soup"
+	"soup"
+	"popcorn"
+	"sweet corn"
+	"rainbow corn"
+
+}
+
+
+applefood{
+	"apple pie"
+	"apple fritters"
+	"apple sauce"
+	"apple juice"
+	"baked apples"
+	"candied apples"
+	"apple butter"
+	"apple bread"
+	"apple tarts"
+	"apple danishes"
+	"apple jam"
+	"apple jelly"
+	"sliced apples with caramel"
+
+}
+
+
+ricefood{
+	"jasmine rice"
+	"white rice"
+	"brown rice"
+	"fried rice"
+	"golden rice"
+	"cheesey rice"
+	"sushi"
+	"onigiri"
+	"Spanish rice"
+	"dirty rice"
+
+}
+
+
+
 

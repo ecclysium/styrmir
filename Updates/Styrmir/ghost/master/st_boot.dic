@@ -3,13 +3,27 @@
 OnFirstBoot
 {
 	OnFirstBootVars
-	"\1\s[-1]%(Styrmir)Hello, and welcome to devotion, human! I have picked you to be my aide."
+	"\1\s[-1]%(StyrmirLook)Human, welcome to love and devotion! \w8\w8%(Smile)My name is Styrmir, \w6the god of weather! \w8I have chosen you to be my aide for this incarnation of your life. \w8Gaze upon it!\w8\w8 %(Point)My very own island of humans.\w4.\w4. However while I might be a god, \w6I have never worked too closely with humans— \w2that’s where you come in! \w8\w8%(StyrmirLook)I need you to help me, \w6to make sure my humans prosper! \w8You can do that,\w6 right?"
+	--
+	"%(br)\q[Of course!,OnFirstBootYes]"
+	--
+	"\n\q[Wha--,OnFirstBootWha]"
+
+
+}
+
+OnFirstBootYes{
+	"%(StyrmirLook)I am most glad to hear it! \w8There is much to be done, \w8so could you take a look at them, \w6and help me figure out what they need?"
+}
+
+OnFirstBootWha{
+	"%(StyrmirLook)No matter! \w8You are here now, \w6and we can prosper together with this little lovely island. \w8Thank you, \w6human, \w6and again I welcome you."
 }
 
 OnFirstBootVars{
 	stroke = 0
 	LastTalk = ""
-	version = "V0.0.4"
+	version = "V1.0.0"
 	fontsize = 12
 	timealive = 0
 	timeopen = 0
@@ -25,7 +39,7 @@ OnFirstBootVars{
 	styweatherendure = 3 //Styrmir's timer for how long will give weather
 	productionmultiplier = 1
 	
-	mood = 0 //0 is neutral, 3 is happy, 6 is sad, 9 is angry
+	mood = 0 //0 is neutral, 1 is downcast, 3 is happy, 6 is sad, 9 is angry
 	amusement = 0
 	discomfort = 0
 	anger = 0
@@ -103,7 +117,7 @@ OnFirstBootVars{
 
 OnInitialize
 {
-	version = "V0.0.4"
+	version = "V1.0.0"
 	timeopen = 0
 	//If you want some variables to reset on boot, put them here. This event will happen even if you add other events like OnGhostChanged
 	//OnInitialize is a NOTIFY event! That means it cannot return scripts. This event is only meant for things like variable changes. See this page on Ukadoc for more info: https://ukagakadreamteam.github.io/ukadoc/manual/spec_shiori3.html
@@ -112,10 +126,16 @@ OnInitialize
 	//if !ISVAR("NewVariable"); NewVariable = 0
 	//This means that it will only set the new variable if the user doesn't already have it, so that their variables don't get overwritten
 	
+	ISVAR("tipsntricks") == 0; tipsntricks = 1;
+	
 	if reference0 != "reload" //For things you want to reset EXCEPT when just reloading; a convenience for you the dev, basically
 	{
 		LastTalk = ""
 	}
+	
+	//!ISVAR("amusement"); amusement = 0
+	//!ISVAR("discomfort"); discomfort = 0
+	//!ISVAR("anger"); anger = 0
 }
 
 OnBoot
@@ -130,19 +150,67 @@ OnBoot
 	//{
 	//	"%(Styrmir)It is %(username)'s birthday today.\w8 Happy birthday, %(username).\w8.\w8 can remove it entirely."
 	//}
-	if _today == "1/1" //You can add whatever cool dates you want with more elseifs here
-	{
-		"%(Styrmir)It's new year's day.\w8 Happy %(year),\w4 %(username)."
-	}
-	else //Normal boot
-	{
-		"%(Styrmir)They don’t really have much right now.\w4.\w4. But maybe you can help change that!"
+	//if _today == "1/1" //You can add whatever cool dates you want with more elseifs here
+//	{
+	//	"%(Styrmir)It's new year's day.\w8 Happy %(year),\w4 %(username)."
+	//}
+	//else //Normal boot
+	//{
+		
+	//}
+	
+	
+	case mood{
+	
+		when 6{ //sad
+			"%(StyrmirLook)Human.\w3.\w3.? \w8You're back? \w8%(Styrmir)Things aren't going great here.\w3.\w3.\w3 I'm sorry.\w3.\w3.\w3"
+		
+		}
+		
+		others{ //neutral etc
+			//""
+			"%(StyrmirLook)%(Surprised)Ah, \w6human, \w6there you are! \w8I was wondering where you had run off to! "
+			"%(StyrmirLook)Oh, \w6you have returned to me human! \w8Are you ready to do some work on the island?"
+			
+			if population < 5; "%(Styrmir)They don’t really have much right now.\w4.\w4. %(StyrmirLook)But maybe you can help change that!"
+		}
+	
 	}
 }
 
 OnClose
 {
-	"%(Styrmir)They don’t really have much right now.\w4.\w4. But maybe you can help change that!"
+	case mood{
+		when 3{ //happy
+			"%(StyrmirLook)%(Frown)Aww, you really have to go? \w8%(StyrmirLook)Ok! \w6I’ll do my best to make sure everyone has a smile on their face when you get back!"
+			"%(StyrmirLook)%(Frown)You’re leaving already? \w8Oh but we were having so much fun! \w8Tell me all about the fun stuff you did while you were gone,\w6 ok?"
+		}
+		when 6{ //sad
+			"%(StyrmirLook)%(Surprised)You’re leaving? \w8%(Styrmir)I’ll probably mess up while you’re gone, \w6%(StyrmirLook)so please come back soon ok.\w4.\w4.?"
+			"%(StyrmirLook)Oh, you’re leaving? \w8%(Styrmir)I’ll try my best not to ruin everything while you’re gone.\w4.\w4."
+		}
+		when 9{	//angry
+			"%(StyrmirLook)You’re leaving me with all the work then? \w8Hmph! \w8%(Frown)Fine, \w8but you \w2better\w2 come back!"
+			"%(StyrmirLook)Wandering off on your own? \w8Fine. \w8%(Frown)But if you forget to come back, \w6I won’t forgive you!"
+		}
+		others{ //neutral
+			"%(StyrmirLook)Farewell, \w6human! \w8I will do my very best to take care of them while you are absent!"
+			"%(StyrmirLook)%(Frown)Oh? \w8Very well.\w4.\w4. \w6%(StyrmirLook)You are temporarily excused from your duties as my assistant!"
+		}
+	
+	}
 	--
 	"\w8\w8\-" //This is what makes the ghost close (after a short pause), do not remove the \- , and MAKE SURE you don't use a \e before this point or it won't work
 }
+
+
+
+
+
+
+
+
+
+
+
+

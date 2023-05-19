@@ -929,49 +929,205 @@ collisionex10,Wings,polygon,512,414,493,392,459,388,429,412,429,421,413,410,386,
 		animation709.pattern2,overlay,1615,200,0,0
 		animation709.pattern3,start,709
 		
+//FESTIVAL DECO - NO FLAG
+	//stage 0
+		animation710.interval,never
+		animation710.pattern0,overlay,1620,0,0,0
+		
+	//stage 1
+		animation711.interval,never
+		animation711.pattern0,overlay,1621,0,0,0
+		
+	//stage 2
+		animation712.interval,never
+		animation712.pattern0,overlay,1622,0,0,0
+		
+	//stage 3
+		animation713.interval,never
+		animation713.pattern0,overlay,1623,0,0,0
+		
+	//stage 4
+		animation714.interval,never
+		animation714.pattern0,overlay,1624,0,0,0
+		
+		
+//FESTIVAL DECO - PRIDE
+	//stage 0
+		animation720.interval,never
+		animation720.pattern0,overlay,1625,0,0,0
+		
+	//stage 1
+		animation721.interval,never
+		animation721.pattern0,overlay,1626,0,0,0
+		
+	//stage 2
+		animation722.interval,never
+		animation722.pattern0,overlay,1627,0,0,0
+		
+	//stage 3
+		animation723.interval,never
+		animation723.pattern0,overlay,1628,0,0,0
+		
+	//stage 4
+		animation724.interval,never
+		animation724.pattern0,overlay,1629,0,0,0
+		
+		
+//FESTIVAL DECO - LIGHT BLUE
+	//stage 0
+		animation730.interval,never
+		animation730.pattern0,overlay,1630,0,0,0
+		
+	//stage 1
+		animation731.interval,never
+		animation731.pattern0,overlay,1631,0,0,0
+		
+	//stage 2
+		animation732.interval,never
+		animation732.pattern0,overlay,1632,0,0,0
+		
+	//stage 3
+		animation733.interval,never
+		animation733.pattern0,overlay,1633,0,0,0
+		
+	//stage 4
+		animation734.interval,never
+		animation734.pattern0,overlay,1634,0,0,0
+		
+		
+//FESTIVAL DECO - ORANGE
+	//stage 0
+		animation740.interval,never
+		animation740.pattern0,overlay,1635,0,0,0
+		
+	//stage 1
+		animation741.interval,never
+		animation741.pattern0,overlay,1636,0,0,0
+		
+	//stage 2
+		animation742.interval,never
+		animation742.pattern0,overlay,1637,0,0,0
+		
+	//stage 3
+		animation743.interval,never
+		animation743.pattern0,overlay,1638,0,0,0
+		
+	//stage 4
+		animation744.interval,never
+		animation744.pattern0,overlay,1639,0,0,0
+		
+		
+		
+//FESTIVAL DECO - DARK BLUE
+	//stage 0
+		animation750.interval,never
+		animation750.pattern0,overlay,1640,0,0,0
+		
+	//stage 1
+		animation751.interval,never
+		animation751.pattern0,overlay,1641,0,0,0
+		
+	//stage 2
+		animation752.interval,never
+		animation752.pattern0,overlay,1642,0,0,0
+		
+	//stage 3
+		animation753.interval,never
+		animation753.pattern0,overlay,1643,0,0,0
+		
+	//stage 4
+		animation754.interval,never
+		animation754.pattern0,overlay,1644,0,0,0
+		
+		
 //ISLAND POWER OPTIONS
 	//lightning rods
-		animation750.interval,never
-		animation750.pattern0,overlay,1619,0,0,0
+		animation780.interval,never
+		animation780.pattern0,overlay,1619,0,0,0
 		
 	//windmills
-		animation752.interval,never
-		animation752.pattern0,overlay,1616,0,0,0
+		animation782.interval,never
+		animation782.pattern0,overlay,1616,0,0,0
 		
 	//solar panels
-		animation754.interval,never
-		animation754.pattern0,overlay,1617,0,0,0
+		animation784.interval,never
+		animation784.pattern0,overlay,1617,0,0,0
 		
 	//water wheel
-		animation756.interval,never
-		animation756.pattern0,overlay,1618,0,0,0
+		animation786.interval,never
+		animation786.pattern0,overlay,1618,0,0,0
+	
+//DRESSUPS
+
+	//trans pin!
+		animation1150.interval,bind
+		animation1150.pattern0,overlay,12001,0,0,0
+	
+//EMOTION TENDENCIES
+
+	//anger
+		animation1195.interval,never
+		animation1195.pattern0,overlay,14001,0,0,0
 		
+	//amusement
+		animation1196.interval,never
+		animation1196.pattern0,overlay,14002,0,0,0
+		
+	//sadness
+		animation1197.interval,never
+		animation1197.pattern0,overlay,14003,0,0,0
+
+//
 
 //TELEPORTING COW!?!
 
 	//Left side clouds
-		animation1200.interval,never
-		animation1200.pattern0,overlay,50,0,70,375
+		animation1300.interval,never
+		animation1300.pattern0,overlay,50,0,70,375
 	
 	//Right side clouds
-		animation1201.interval,never
-		animation1201.pattern0,overlay,50,0,420,430
+		animation1301.interval,never
+		animation1301.pattern0,overlay,50,0,420,430
 	
 	//Shoulder
-		animation1202.interval,never
-		animation1202.pattern0,overlay,50,0,190,205
+		animation1302.interval,never
+		animation1302.pattern0,overlay,50,0,190,205
 	
 	//Hair
-		animation1203.interval,never
-		animation1203.pattern0,overlay,50,0,295,98
+		animation1303.interval,never
+		animation1303.pattern0,overlay,50,0,295,98
 	
 	//Ear
-		animation1204.interval,never
-		animation1204.pattern0,overlay,50,0,325,133
+		animation1304.interval,never
+		animation1304.pattern0,overlay,50,0,325,133
 	
 	//Bridge!?
-		animation1205.interval,never
-		animation1205.pattern0,overlay,50,0,105,283
+		animation1305.interval,never
+		animation1305.pattern0,overlay,50,0,105,283
+
+
+//CANDLES
+	
+	//one
+		animation1400.interval,never
+		animation1400.pattern0,overlay,13001,0,0,0
+	
+	//two
+		animation1401.interval,never
+		animation1401.pattern0,overlay,13002,0,0,0
+		
+	//three
+		animation1402.interval,never
+		animation1402.pattern0,overlay,13003,0,0,0
+	
+	//four
+		animation1403.interval,never
+		animation1403.pattern0,overlay,13004,0,0,0
+		
+	//five
+		animation1404.interval,never
+		animation1404.pattern0,overlay,13005,0,0,0
+	
 
 		
 //SPARKLES

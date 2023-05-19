@@ -5,3 +5,12 @@ font.color.b,255
 font.shadowcolor.r,27
 font.shadowcolor.g,36
 font.shadowcolor.b,55
+
+cursor.blendmethod,notmaskpen
+cursor.style,square
+cursor.brush.color.r,168
+cursor.brush.color.g,189
+cursor.brush.color.b,227
+cursor.pen.color.r,84
+cursor.pen.color.g,32
+cursor.pen.color.b,27

@@ -41,12 +41,44 @@ OnMouseMove.Sakura
 {
 	if reference4 == "Wings"
 	{
-		if RAND(3) == 0; "%(Styrmir)Oh! That kind of tickles!"
+		if RAND(3) == 0{
+			if mood != 9{
+				"%(Styrmir)Oh! That kind of tickles!"
+			}else{
+				"%(StyrmirLook)Hands off, human."
+			}
+		}
 		
 		
 	}else{
-		//pets!
+		
 		pets++
+		OnUpdateMood
+		case mood{
+			when 3{ //happy
+				"%(StyrmirLook)%(Smile)Yay! \w8Headpats! \w8Thank you human!"
+				"%(StyrmirLook)%(Smile)Wow! \w8Thank you, \w6human! \w8I appreciate the praise!"
+			}
+			when 6{ //sad
+				"Oh.\w4.\w4. thank you.\w4.\w4. %(StyrmirLook)%(Smile)I’m starting to feel a little better.\w5.\w5."
+				"H-huh.\w4.\w4.? \w6%(StyrmirLook)%(Smile)Oh, \w6thank you.\w4.\w4. Are you trying to make me feel better?"
+				if discomfort > 0{
+					discomfort--
+					amusement++
+				}
+			
+			}
+			when 9{	//angry
+				"%(StyrmirLook)Hmph! \w8Trying to get me in a better mood are you? \w8Well it isn’t working!"
+				"%(StyrmirLook)Hands off! \w8Or I’ll strike you down!"
+			
+			}
+			others{ //neutral
+				"%(StyrmirLook)%(Smile)Hmm? \w8Is this a way of showing devotion? \w8How interesting!"
+				"%(StyrmirLook)%(Smile)Are you praising me because I’m taking good care of the island?"
+			}
+		
+		}
 	}
 }
 
@@ -69,6 +101,9 @@ OnMouseWheel.Sakura
 {
 	if reference4 == "Wings"
 	{
+		amusement+=1
+		tickles++
+		
 		if amusement == 10{
 			MoodForce(3,"tickling")
 			"%(Styrmir)BWAHAHA-- I can't stop laughing!"
@@ -87,12 +122,33 @@ OnMouseWheel.Sakura
 				
 			}
 			
+			case mood{
+				when 3{ //happy
+					"Hahahah! \w8%(StyrmirLook)%(Smile)Are we having a tickle fight? \w8Watch out!"
+					"Hahahah! \w8%(StyrmirLook)%(Smile)Ok, \w4ok! \w8I give up! \w8You win! \w8Haha! \w8You’re too good at tickling!"
+				}
+				when 6{ //sad
+					"Ah,\w6%(StyrmirLook) what are you- \w3%(Smile)Haha- \w3Hahaha- \w6H-hey are you trying to cheer me up? \w8Haha!"
+					"%(StyrmirLook)%(Smile)Hahaha! \w8Stop it! \w8Hahah.\w2.\w2. phew.\w3.\w3. \w8Seriously, Stop it!"
+				
+				}
+				when 9{	//angry
+					"%(StyrmirLook)What are you- \w4%(Smile)Hahahahaha! \w8Hey! \w8Stop tickling me! \w8Hahaha! \w8Seriously, \w6I mean it!"
+					"%(StyrmirLook)%(Smile)Hahahah! \w8Hey—! \w8Knock it off human! \w8Hahahah! \w8I won’t show mercy on you if you don’t \w4stop it!"
+				
+				}
+				others{ //neutral
+					"Ah, \w6what are you- \w6%(StyrmirLook)%(Smile)Hahahahah! \w8Hey! \w8My wings are ticklish! \w8\w4Stop it!"
+					"Hahahahaha! \w8%(StyrmirLook)%(Smile)Human stop tickling me! \w8Hahaha! \w8Please-!"
+				}
+			
+			}
+			
 		}
 		
-		amusement++
 		
 	}
-	tickles++
+	
 }
 
 
@@ -100,9 +156,11 @@ OnPunch.Sakura{
 	if mood == 9{
 		anger++
 		"%(StyrmirLook)I WILL NOT TOLERATE THIS INSOLENCE."
+		"%(StyrmirLook)%(Frown)Ouch! \w8What’s your problem!? \w8You’ll just make me angrier!"
+		"%(StyrmirLook)%(Frown)Ow! \w8Don’t make me strike you down!"
 	}else{
 		
-		if anger >= 15{
+		if anger > 15{
 			MoodForce(9,"punching")
 			"%(StyrmirLook)%(Styrmir)NOW YOU'VE DONE IT, MORTAL."
 		}else{
@@ -111,6 +169,23 @@ OnPunch.Sakura{
 			OnUpdateMood
 			"%(StyrmirLook)%(Frown)Hey-- what was that for!?"
 			"%(StyrmirLook)%(Frown)Don't hit me!"
+			
+			case mood{
+				when 3{ //happy
+					"%(StyrmirLook)%(Frown)Ouch! \w8Hey, \w6you’re ruining my good mood!"
+					"%(StyrmirLook)%(Frown)Ow! \w8Don’t hit me or I’ll get really angry with you!"
+				}
+				when 6{ //sad
+					"%(StyrmirLook)Ouch! \w8%(Styrmir)I probably deserve that.\w4.\w4.\w4"
+					"%(StyrmirLook)Ow! \w8Kicking me while I’m already down, \w4are you?"
+				
+				}
+				others{ //neutral
+					"%(StyrmirLook)%(Frown)Ouch! \w8What did I do to deserve that?!"
+					"%(StyrmirLook)%(Frown)Ow! \w8Why would you do that!?"
+				}
+			
+			}
 		}
 		
 	}

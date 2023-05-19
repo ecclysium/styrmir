@@ -1,7 +1,7 @@
 //ISLAND
 
 OnIslandInfo{
-	"%(BB)\_q\f[align,center]\f[height,+2]THE ISLAND\f[height,-2]\n"
+	"%(Island)%(BB)\_q\f[align,center]\f[height,+2]THE ISLAND\f[height,-2]\n"
 	--
 	if currentfestival != "None"; "\f[height,-2]~%currentfestival~\f[height,+2]\n"
 	--
@@ -226,15 +226,15 @@ OnMinuteChange{
 	}
 	
 	if minute % 5 == 0{
-		dewdrops += (housingstage*2) + 1
+		dewdrops += ((housingstage*2) + 1) * happinessMod
 	}
 	
 	OnUpdateMood
+	OnMoodDecay //Slowly decays, but sometimes we want to check mood w/o decaying it so they're separate
 	
 	
 	
-	
-	if minute % 30 == 0 && recentdeaths > 0{
+	if minute % 15 == 0 && recentdeaths > 0{
 		recentdeaths--
 	}
 	
@@ -267,12 +267,7 @@ OnMinuteChange{
 	if timeuntilfestivalend > 0{
 		timeuntilfestivalend--
 	}else{
-		if currentfestival == "Harvest Festival"{
-			largestcowcontest == randVillagerName
-			dewdrops += 10
-		}
-		dewdrops += 5 //get Dew from festivals completing!
-		currentfestival = "None"
+		OnEndFestival
 		
 	}
 	
@@ -348,11 +343,11 @@ OnNaturalDecay{
 
 }
 
-//every 4
+//every so often
 OnGrowPop{
 	if population > 1{
 		if food > population * population{
-			birthVillager(TOINT(population/4)) //booming!
+			birthVillager(MAX(TOINT(population/10),1)) //booming!
 		}elseif food > population * 25{
 			birthVillager(4)
 		}elseif food > population * 10{
@@ -373,7 +368,7 @@ OnGrowPop{
 
 //Each minute
 OnNaturalGrowth{
-	addWater((population/100)* productionmultiplier) //water is sustainable... nope, mostly need rain.
+	addWater((population/100)* productionmultiplier * happinessMod) //water is sustainable... nope, mostly need rain.
 	if mood == 6 {
 		addWater(farms * productionmultiplier) //bonus water if Styrmir's sad!
 	}
@@ -383,22 +378,22 @@ OnNaturalGrowth{
 		if watercontent > population/50{ //if this field has enough water to keep producing
 			case _crop{
 				when "berries"{
-					addFood(1* productionmultiplier)
+					addFood(1* productionmultiplier * happinessMod)
 				}
 				when "rice"{
-					addFood(2* productionmultiplier)
+					addFood(2* productionmultiplier * happinessMod)
 				}
 				when "potatoes"{
-					addFood(3* productionmultiplier)
+					addFood(3* productionmultiplier * happinessMod)
 				}
 				when "corn"{
-					addFood(4* productionmultiplier)
+					addFood(4* productionmultiplier * happinessMod)
 				}
 				when "apples"{
-					addFood(6* productionmultiplier)
+					addFood(6* productionmultiplier * happinessMod)
 				}
 				when "wheat"{
-					addFood(2* productionmultiplier)
+					addFood(2* productionmultiplier * happinessMod)
 				}
 			}
 			
@@ -409,9 +404,9 @@ OnNaturalGrowth{
 	//Cows
 	if watercontent > (pens[0])/10{ //if this field has enough water to give cows
 		if rules[1] == 1{ //if Vegetarian
-			addFood((animals[0] * productionmultiplier)/10)
+			addFood((animals[0] * (productionmultiplier)/10) * happinessMod )
 		}else{
-			addFood((animals[0] * productionmultiplier)/4)
+			addFood((animals[0] * (productionmultiplier)/4)  * happinessMod)
 		}
 		
 		watercontent -= (pens[0])/10
@@ -437,7 +432,7 @@ OnNaturalGrowth{
 	}
 	//Chickens
 	if watercontent > (pens[2])/50{ //if this field has enough water to give chickens
-		addFood((animals[0] * productionmultiplier)/20)
+		addFood(((animals[0]  * productionmultiplier)/20) * happinessMod)
 		watercontent -= (pens[2])/50
 	}else{
 		//Otherwise, chance to kill a chicken. :(
@@ -493,6 +488,65 @@ OnNaturalGrowth{
 
 
 
+//---------------------------------------------------------------------------FESTIVALS-------------------------------------
+
+
+
+
+OnCheckForFestival{
+	//go through each festival and see if any can be activated, then pick one at random and reset the timer
+	for _i = 0; _i < ARRAYSIZE(Festivals); _i++{
+		_thisfestival = Festivals[_i]
+		_unlocked = unlockedfestivals[_i]
+		_reqs = _thisfestival[1,","]
+		if EVAL(_reqs){
+			if _unlocked == 1{
+				"\![raise,OnActivateFestival,%_i]"
+			}else{
+				""
+			}
+		}
+		
+	}
+
+}
+
+OnActivateFestival{
+	_index = TOINT(reference0)
+	
+	if happiness < getHappyCap / 4{ //festivals are more often if they're unhappy
+		festivaltimer = 20 + RAND(10)
+	}elseif happiness < getHappyCap / 3{ 
+		festivaltimer = 20 + RAND(30)
+	}elseif happiness < getHappyCap / 2{ 
+		festivaltimer = 20 + RAND(60)
+	}else{
+		festivaltimer = 20 + RAND(100)
+	}
+	
+	timeuntilfestivalend = 10
+	currentfestival = (Festivals[_i])[0]
+	startFestivalTalk(_index)
+	
+	
+}
+
+OnEndFestival{
+	if currentfestival == "Harvest Festival"{
+		largestcowcontest == randVillagerName
+		dewdrops += 10
+	}
+	dewdrops += 5 //get Dew from festivals completing!
+	currentfestival = "None"
+}
+
+
+
+
+
+
+//----------------------------------------------------------------------------VILLAGERS-----------------------------------------
+
 
 
 
@@ -504,6 +558,10 @@ OnVillagerMenu{
 		"Current Priest: %currentpriestname"
 	}
 	--
+	if largestcowcontest != ""{
+		"\n%largestcowcontest won the Largest Cow Contest last Harvest Festival."
+	}
+	--
 	"%(br)\![*]\q[Back,OnIslandInfo]  \![*]\q[Nevermind,blank]"
 
 }
@@ -513,10 +571,20 @@ OnVillagerMenu{
 
 
 
-randVillagerName{
+randVillagerName: nonoverlap {
 	fullName //for now gives a random name, but later there will be a list of living villagers
+	if RAND(3) == 0{
+		//chance to be a more memorable villager, tho
+		if currentpriestname != ""; currentpriestname
+		if largestcowcontest != ""; largestcowcontest
+	}
 }
 
+
+
+deadVillagerName{
+	fullName
+}
 
 
 birthVillager{
@@ -603,5 +671,11 @@ getHappyCap{
 	}
 	_cap //return
 	
+
+}
+
+
+happinessMod{
+	TOREAL(TOREAL(happiness)/100)
 
 }

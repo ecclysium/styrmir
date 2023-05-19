@@ -7,3 +7,6 @@ craftmanurl,
 
 seriko.alignmenttodesktop,free
 seriko.use_self_alpha,1
+
+sakura.menuitem0,1150
+sakura.bindgroup1150.name,Pins,Trans Pride,Trans Pride
